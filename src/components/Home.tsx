@@ -1,101 +1,100 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { decodeToken } from 'react-jwt';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import {
-  fetchBeers,
-  getBeersError,
-  getBeersStatus,
-  selectAllBeers,
-} from '../features/beers/beersSlice';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import {
   currentCart,
   productAdded,
   productRemoved,
-} from '../features/cart/cartSlice';
+} from '../state/ducks/cart/reducers';
+
+import { hooks } from '../state';
+import { beerOperations, beerSelectors } from '../state/ducks/beers';
 import {
-  fetchCategories,
-  getCategoriesError,
-  getCategoriesStatus,
-  selectAllCategories,
-} from '../features/categories/categoriesSlice';
+  categoriesOperations,
+  categoriesSelectors,
+} from '../state/ducks/categories';
 
 const Home = () => {
   const token = localStorage.getItem('token');
+  const { useAppDispatch, useAppSelector } = hooks;
+  const dispatch = useAppDispatch();
 
-  const dispatch = useDispatch();
+  const { getBeers } = beerOperations;
+  const { selectBeers } = beerSelectors;
+  const { beers } = useAppSelector(selectBeers);
 
-  const beers = useSelector(selectAllBeers);
-  const beersStatus = useSelector(getBeersStatus);
-  const beersError = useSelector(getBeersError);
-
-  const categories = useSelector(selectAllCategories);
-  const categoriesStatus = useSelector(getCategoriesStatus);
-  const categoriesError = useSelector(getCategoriesError);
+  const { getCategories } = categoriesOperations;
+  const { selectCategories } = categoriesSelectors;
+  const { categories } = useAppSelector(selectCategories);
 
   const cart = useSelector(currentCart);
 
   useEffect(() => {
-    if (beersStatus === 'idle' && token) {
-      dispatch(fetchBeers(token));
-    }
-  }, [beersStatus, dispatch]);
-
-  useEffect(() => {
-    if (categoriesStatus === 'idle' && token) {
-      dispatch(fetchCategories(token));
-    }
-  }, [categoriesStatus, dispatch]);
-
-  let beersContent;
-  if (beersStatus === 'loading') {
-    beersContent = <p>"Loading..."</p>;
-  } else if (beersStatus === 'succeeded') {
-    beersContent = beers.map((beer: any) => (
-      <li key={beer.id}>
-        {beer.title}
-        <button
-          onClick={() => dispatch(productAdded({ ...beer, quantity: 1 }))}
-        >
-          Add to Cart
-        </button>
-        {cart.find((cartBeer: any) => cartBeer.id === beer.id) && (
-          <button onClick={() => dispatch(productRemoved({ id: beer.id }))}>
-            Remove
-          </button>
-        )}
-      </li>
-    ));
-  } else if (beersStatus === 'failed') {
-    beersContent = <p>{beersError}</p>;
-  }
-
-  let categoriesContent;
-  if (categoriesStatus === 'loading') {
-    categoriesContent = <p>"Loading..."</p>;
-  } else if (categoriesStatus === 'succeeded') {
-    categoriesContent = categories.map((category: any) => (
-      <li key={category}>{category}</li>
-    ));
-  } else if (categoriesStatus === 'failed') {
-    categoriesContent = <p>{categoriesError}</p>;
-  }
-
-  useEffect(() => {
     if (token) {
-      console.log(decodeToken(token));
+      dispatch(getBeers(token));
+      dispatch(getCategories(token));
     }
-  }, [token]);
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (categoriesStatus === 'idle' && token) {
+  //     dispatch(fetchCategories(token));
+  //   }
+  // }, [categoriesStatus, dispatch]);
+
+  // let beersContent;
+
+  // beersContent = beers.map((beer: any) => (
+  //   <li key={beer.id}>
+  //     {beer.title}
+  //     <button onClick={() => dispatch(productAdded({ ...beer, quantity: 1 }))}>
+  //       Add to Cart
+  //     </button>
+  //     {cart.find((cartBeer: any) => cartBeer.id === beer.id) && (
+  //       <button onClick={() => dispatch(productRemoved({ id: beer.id }))}>
+  //         Remove
+  //       </button>
+  //     )}
+  //   </li>
+  // ));
+
+  // let categoriesContent;
+  // if (categoriesStatus === 'loading') {
+  //   categoriesContent = <p>"Loading..."</p>;
+  // } else if (categoriesStatus === 'succeeded') {
+  //   categoriesContent = categories.map((category: any) => (
+  //     <li key={category}>{category}</li>
+  //   ));
+  // } else if (categoriesStatus === 'failed') {
+  //   categoriesContent = <p>{categoriesError}</p>;
+  // }
 
   return (
     <>
-      {!token && <Navigate to='/register' />}
       <section>
-        <ul>{categoriesContent}</ul>
+        {/* <ul>{categoriesContent}</ul> */}
+        {categories &&
+          categories.map((category: any) => <li key={category}>{category}</li>)}
       </section>
       <section>
-        <ul>{beersContent}</ul>
+        {/* <ul>{beersContent}</ul> */}
+        {beers &&
+          beers.map((beer: any) => (
+            <li key={beer.id}>
+              {beer.title}
+              <button
+                onClick={() => dispatch(productAdded({ ...beer, quantity: 1 }))}
+              >
+                Add to Cart
+              </button>
+              {cart.find((cartBeer: any) => cartBeer.id === beer.id) && (
+                <button
+                  onClick={() => dispatch(productRemoved({ id: beer.id }))}
+                >
+                  Remove
+                </button>
+              )}
+            </li>
+          ))}
       </section>
     </>
   );

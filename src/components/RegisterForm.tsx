@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { setToken } from '../features/user/userSlice';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -10,9 +9,6 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLogged, setIsLogged] = useState(false);
-
-  const [currentState, functionThatUpdatesTheCurrentState] =
-    useState('initial state');
 
   const onNameChanged = (e: any) => setName(e.target.value);
   const onEmailChanged = (e: any) => setEmail(e.target.value);
@@ -34,7 +30,6 @@ const RegisterForm = () => {
       };
       axios.post('http://localhost:4000/register', params).then((response) => {
         localStorage.setItem('token', response.data.accessToken);
-        setToken(response.data.accessToken);
         setIsLogged(true);
         return;
       });
