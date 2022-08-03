@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
 import {
   currentCart,
   productAdded,
   productRemoved,
-} from '../state/ducks/cart/reducers';
-
-import { hooks } from '../state';
-import { beerOperations, beerSelectors } from '../state/ducks/beers';
+} from '../../state/ducks/cart/reducers';
+import { hooks } from '../../state';
+import { beerOperations, beerSelectors } from '../../state/ducks/beers';
 import {
   categoriesOperations,
   categoriesSelectors,
-} from '../state/ducks/categories';
+} from '../../state/ducks/categories';
+import * as S from './styles';
 
 const Home = () => {
   const token = localStorage.getItem('token');
@@ -35,46 +36,19 @@ const Home = () => {
     }
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (categoriesStatus === 'idle' && token) {
-  //     dispatch(fetchCategories(token));
-  //   }
-  // }, [categoriesStatus, dispatch]);
-
-  // let beersContent;
-
-  // beersContent = beers.map((beer: any) => (
-  //   <li key={beer.id}>
-  //     {beer.title}
-  //     <button onClick={() => dispatch(productAdded({ ...beer, quantity: 1 }))}>
-  //       Add to Cart
-  //     </button>
-  //     {cart.find((cartBeer: any) => cartBeer.id === beer.id) && (
-  //       <button onClick={() => dispatch(productRemoved({ id: beer.id }))}>
-  //         Remove
-  //       </button>
-  //     )}
-  //   </li>
-  // ));
-
-  // let categoriesContent;
-  // if (categoriesStatus === 'loading') {
-  //   categoriesContent = <p>"Loading..."</p>;
-  // } else if (categoriesStatus === 'succeeded') {
-  //   categoriesContent = categories.map((category: any) => (
-  //     <li key={category}>{category}</li>
-  //   ));
-  // } else if (categoriesStatus === 'failed') {
-  //   categoriesContent = <p>{categoriesError}</p>;
-  // }
-
   return (
     <>
-      <section>
-        {/* <ul>{categoriesContent}</ul> */}
-        {categories &&
-          categories.map((category: any) => <li key={category}>{category}</li>)}
-      </section>
+      <S.CategoriesSection>
+        <S.CategoriesList>
+          {categories &&
+            categories.map((category: any) => (
+              <>
+                <li key={category}>{category}</li>
+                <li>|</li>
+              </>
+            ))}
+        </S.CategoriesList>
+      </S.CategoriesSection>
       <section>
         {/* <ul>{beersContent}</ul> */}
         {beers &&

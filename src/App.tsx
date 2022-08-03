@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './pages/Home';
 import Edit from './pages/Edit/Edit';
 import AdminRoute from './modules/route-manager/AdminRoute';
-import Users from './components/Users';
+import Users from './pages/Users/Users';
 import Login from './pages/Login';
 import PrivateRoute from './modules/route-manager/PrivateRoute';
 import EditorRoute from './modules/route-manager/EditorRoute';

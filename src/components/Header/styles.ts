@@ -5,8 +5,9 @@ import { BeerEmpireLogo } from '../../assets/images';
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 90%;
   justify-content: space-between;
+  margin: auto;
 `;
 
 export const StyledLogo = styled(BeerEmpireLogo)`
