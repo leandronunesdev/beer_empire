@@ -44,7 +44,6 @@ const authReducer = createReducer(initialState, (builder) => {
       state.isFetching = true;
     })
     .addCase(actions.userRegister.fulfilled, (state, action: any) => {
-      console.log('t', action.payload.data);
       const { accessToken, user } = action.payload.data;
       state.isFetching = false;
       state.error = undefined;

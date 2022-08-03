@@ -14,7 +14,6 @@ const cartSlice = createSlice({
       if (existingProduct) {
         existingProduct.quantity++;
       } else {
-        console.log(id);
         state.cart.push(action.payload);
       }
     },

@@ -13,7 +13,6 @@ const getCategories = createAsyncThunk(
       const { data: categories } = await axios.get(CATEGORIES_URL, {
         headers: headers,
       });
-      console.log(categories);
       return { categories };
     } catch (err: any) {
       if (!(err as Record<string, string>).response) {

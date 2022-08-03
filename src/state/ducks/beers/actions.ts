@@ -13,7 +13,6 @@ const getBeers = createAsyncThunk(
       const { data: beers } = await axios.get(BEERS_URL, {
         headers: headers,
       });
-      console.log(beers);
       return { beers };
     } catch (err) {
       if (!(err as Record<string, string>).response) {

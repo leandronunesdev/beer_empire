@@ -38,10 +38,6 @@ const RegisterForm = () => {
     setAgeError('You are to young to use this website, sorry');
   };
 
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
-
   return (
     <>
       <S.StyledForm onSubmit={registerUser}>
