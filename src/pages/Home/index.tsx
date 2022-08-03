@@ -49,27 +49,46 @@ const Home = () => {
             ))}
         </S.CategoriesList>
       </S.CategoriesSection>
-      <section>
-        {/* <ul>{beersContent}</ul> */}
+      <S.BeersSection>
         {beers &&
           beers.map((beer: any) => (
-            <li key={beer.id}>
-              {beer.title}
-              <button
-                onClick={() => dispatch(productAdded({ ...beer, quantity: 1 }))}
-              >
-                Add to Cart
-              </button>
-              {cart.find((cartBeer: any) => cartBeer.id === beer.id) && (
+            <S.ProductCard key={beer.id}>
+              <img src={beer.image} alt={beer.title} />
+              <p>{beer.title}</p>
+              <p>{beer.price}</p>
+              {cart.find((cartBeer: any) => cartBeer.id === beer.id) ? (
+                <S.SpecialButton>
+                  <button
+                    onClick={() => dispatch(productRemoved({ id: beer.id }))}
+                  >
+                    -
+                  </button>
+                  <p>
+                    {
+                      cart.find((cartBeer: any) => cartBeer.id === beer.id)
+                        .quantity
+                    }
+                  </p>
+                  <button
+                    onClick={() =>
+                      dispatch(productAdded({ ...beer, quantity: 1 }))
+                    }
+                  >
+                    +
+                  </button>
+                </S.SpecialButton>
+              ) : (
                 <button
-                  onClick={() => dispatch(productRemoved({ id: beer.id }))}
+                  onClick={() =>
+                    dispatch(productAdded({ ...beer, quantity: 1 }))
+                  }
                 >
-                  Remove
+                  Add to Cart
                 </button>
               )}
-            </li>
+            </S.ProductCard>
           ))}
-      </section>
+      </S.BeersSection>
     </>
   );
 };
