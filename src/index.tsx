@@ -4,16 +4,21 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import store from './state/store';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle, Theme } from './styles';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/*' element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={Theme}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/*' element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   </Provider>
 );

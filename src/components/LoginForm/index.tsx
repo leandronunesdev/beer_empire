@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { hooks } from '../state';
-import { authOperations, authSelectors } from '../state/ducks/auth';
+import { hooks } from '../../state';
+import { authOperations, authSelectors } from '../../state/ducks/auth';
+import * as S from './styles';
 
 const LoginForm = () => {
   const { logIn } = authOperations;
@@ -14,14 +14,10 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [isLogged, setIsLogged] = useState(false);
-
   const onEmailChanged = (e: any) => setEmail(e.target.value);
   const onPasswordChanged = (e: any) => setPassword(e.target.value);
 
   const canLogin = [email, password].every(Boolean);
-
-  const token = localStorage.getItem('token');
 
   const loginUser = (e: any) => {
     e.preventDefault();
@@ -36,31 +32,32 @@ const LoginForm = () => {
 
   return (
     <>
-      {token && <Navigate to='/' />}
-      {isLogged && <Navigate to='/' />}
-
-      <form onSubmit={loginUser}>
-        <label htmlFor='userEmail'>Email</label>
-        <input
+      <S.StyledForm onSubmit={loginUser}>
+        <S.StyledInput
           type='email'
           name='userEmail'
           id='userEmail'
           value={email}
           onChange={onEmailChanged}
+          placeholder='E-mail'
           required
         />
-        <label htmlFor='userPassword'>Password</label>
-        <input
+        <S.StyledInput
           type='password'
           name='userPassword'
           id='userPassword'
           value={password}
           onChange={onPasswordChanged}
+          placeholder='Password'
           required
         />
-        {error && <p>{error.message}</p>}
-        <button disabled={!canLogin}>Login</button>
-      </form>
+        {error && (
+          <S.StyledError>
+            Login failed! Please, check your credentials
+          </S.StyledError>
+        )}
+        <S.StyledButton disabled={!canLogin}>Login</S.StyledButton>
+      </S.StyledForm>
     </>
   );
 };

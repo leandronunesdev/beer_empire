@@ -1,19 +1,17 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
-import RegisterForm from './components/RegisterForm';
-import LoginForm from './components/LoginForm';
-import PrivateRoute from './components/PrivateRoute';
-import EditorRoute from './components/EditorRoute';
-import Edit from './components/Edit';
-import AdminRoute from './components/AdminRoute';
+import Edit from './pages/Edit/Edit';
+import AdminRoute from './modules/route-manager/AdminRoute';
 import Users from './components/Users';
+import Login from './pages/Login';
+import PrivateRoute from './modules/route-manager/PrivateRoute';
+import EditorRoute from './modules/route-manager/EditorRoute';
 
 function App() {
   return (
     <Routes>
-      <Route path='/register' element={<RegisterForm />} />
-      <Route path='/login' element={<LoginForm />} />
+      <Route path='/login' element={<Login />} />
       <Route path='/' element={<PrivateRoute />}>
         <Route index element={<Home />} />
         <Route path='/edit' element={<EditorRoute />}>

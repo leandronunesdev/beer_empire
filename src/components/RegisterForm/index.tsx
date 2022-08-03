@@ -1,14 +1,20 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { hooks } from '../../state';
+import { authOperations, authSelectors } from '../../state/ducks/auth';
+import * as S from './styles';
 
 const RegisterForm = () => {
+  const { userRegister } = authOperations;
+  const { useAppDispatch, useAppSelector } = hooks;
+  const { selectAuth } = authSelectors;
+  const { error } = useAppSelector(selectAuth);
+
+  const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLogged, setIsLogged] = useState(false);
+  const [ageError, setAgeError] = useState('');
 
   const onNameChanged = (e: any) => setName(e.target.value);
   const onEmailChanged = (e: any) => setEmail(e.target.value);
@@ -16,8 +22,6 @@ const RegisterForm = () => {
   const onPasswordChanged = (e: any) => setPassword(e.target.value);
 
   const canSave = [name, email, parseInt(age) >= 18, password].every(Boolean);
-
-  const token = localStorage.getItem('token');
 
   const registerUser = (e: any) => {
     e.preventDefault();
@@ -28,61 +32,60 @@ const RegisterForm = () => {
         age: age,
         password: password,
       };
-      axios.post('http://localhost:4000/register', params).then((response) => {
-        localStorage.setItem('token', response.data.accessToken);
-        setIsLogged(true);
-        return;
-      });
+      dispatch(userRegister(params));
+      return;
     }
-    setError('You are to young to use this website, sorry');
+    setAgeError('You are to young to use this website, sorry');
   };
+
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   return (
     <>
-      {token && <Navigate to='/' />}
-      {isLogged && <Navigate to='/' />}
-
-      <form onSubmit={registerUser}>
-        <label htmlFor='userName'>Name</label>
-        <input
+      <S.StyledForm onSubmit={registerUser}>
+        <S.StyledInput
           type='text'
           name='userName'
           id='userName'
           value={name}
           onChange={onNameChanged}
+          placeholder='Your name'
           required
         />
-        <label htmlFor='userEmail'>Email</label>
-        <input
+        <S.StyledInput
           type='email'
           name='userEmail'
           id='userEmail'
           value={email}
           onChange={onEmailChanged}
+          placeholder='E-mail'
           required
         />
-        <label htmlFor='userAge'>Age</label>
-        <input
+        <S.StyledInput
           type='number'
           name='userAge'
           id='userAge'
           value={age}
           onChange={onAgeChanged}
+          placeholder='Your age'
           required
         />
-        <label htmlFor='userPassword'>Password</label>
-        <input
+        <S.StyledInput
           type='password'
           name='userPassword'
           id='userPassword'
           value={password}
           onChange={onPasswordChanged}
+          placeholder='Password'
           required
         />
         <p>You must be 18 or older to use this website</p>
-        {error && <p>{error}</p>}
-        <button disabled={!canSave}>Register</button>
-      </form>
+        {error && <S.StyledError>{error.message}</S.StyledError>}
+        {ageError && <S.StyledError>{ageError}</S.StyledError>}
+        <S.StyledButton disabled={!canSave}>Register</S.StyledButton>
+      </S.StyledForm>
     </>
   );
 };

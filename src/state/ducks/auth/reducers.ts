@@ -13,7 +13,7 @@ const initialState: AuthState = {
   userName: undefined,
   userRole: undefined,
   isFetching: false,
-  token: {},
+  token: undefined,
   error: undefined,
 };
 
@@ -23,7 +23,6 @@ const authReducer = createReducer(initialState, (builder) => {
       state.isFetching = true;
     })
     .addCase(actions.logIn.fulfilled, (state, action: any) => {
-      console.log('t', action.payload.data);
       const { accessToken, user } = action.payload.data;
       state.isFetching = false;
       state.error = undefined;
@@ -37,9 +36,25 @@ const authReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actions.logOut.fulfilled, (state, action) => {
       state.isFetching = false;
-      // state.user = undefined;
+      state.userName = undefined;
+      state.userRole = undefined;
       state.token = undefined;
-      state.error = action.payload.error;
+    })
+    .addCase(actions.userRegister.pending, (state) => {
+      state.isFetching = true;
+    })
+    .addCase(actions.userRegister.fulfilled, (state, action: any) => {
+      console.log('t', action.payload.data);
+      const { accessToken, user } = action.payload.data;
+      state.isFetching = false;
+      state.error = undefined;
+      state.userName = user.name;
+      state.userRole = user.role;
+      state.token = accessToken;
+    })
+    .addCase(actions.userRegister.rejected, (state, action) => {
+      state.isFetching = false;
+      state.error = action.error;
     });
 });
 
