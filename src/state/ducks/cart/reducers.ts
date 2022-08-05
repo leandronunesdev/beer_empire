@@ -23,10 +23,12 @@ const cartSlice = createSlice({
 
       if (existingProduct.quantity > 1) {
         existingProduct.quantity--;
+        return;
       }
       if (existingProduct.quantity === 1) {
         const cart = state.cart.filter((beer: any) => beer.id !== id);
         state.cart = cart;
+        return;
       }
     },
   },

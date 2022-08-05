@@ -22,7 +22,7 @@ const Header = () => {
       <S.StyledLogo />
       <p>Welcome {userName}!</p>
       <p>Your access level is: {userRole}</p>
-      <div>Cart: {cart.length}</div>
+      <S.SyledLink to='/cart'>Cart: {cart.length}</S.SyledLink>
       <S.SyledLink to='/'>Home</S.SyledLink>
       {(userRole === 'editor' || userRole === 'admin') && (
         <S.SyledLink to='/edit/product'>Edit Products</S.SyledLink>

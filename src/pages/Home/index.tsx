@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
 import {
   currentCart,
   productAdded,
@@ -27,7 +25,7 @@ const Home = () => {
   const { selectCategories } = categoriesSelectors;
   const { categories } = useAppSelector(selectCategories);
 
-  const cart = useSelector(currentCart);
+  const cart = useAppSelector(currentCart);
 
   useEffect(() => {
     if (token) {
@@ -55,7 +53,7 @@ const Home = () => {
             <S.ProductCard key={beer.id}>
               <img src={beer.image} alt={beer.title} />
               <p>{beer.title}</p>
-              <p>{beer.price}</p>
+              <p>$ {beer.price}</p>
               {cart.find((cartBeer: any) => cartBeer.id === beer.id) ? (
                 <S.SpecialButton>
                   <button

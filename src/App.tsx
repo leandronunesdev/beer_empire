@@ -7,6 +7,7 @@ import Users from './pages/Users/Users';
 import Login from './pages/Login';
 import PrivateRoute from './modules/route-manager/PrivateRoute';
 import EditorRoute from './modules/route-manager/EditorRoute';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/' element={<PrivateRoute />}>
         <Route index element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/edit' element={<EditorRoute />}>
           <Route path='/edit/product' element={<Edit />} />
         </Route>
