@@ -105,3 +105,10 @@ export const CartFooter = styled.div`
     }
   }
 `;
+
+export const DisclaimerText = styled.p`
+  align-self: center;
+  margin-top: 64px;
+  font-weight: bold;
+  font-size: 24px;
+`;

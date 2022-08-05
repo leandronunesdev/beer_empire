@@ -31,11 +31,14 @@ const cartSlice = createSlice({
         return;
       }
     },
+    checkout(state: any) {
+      state.cart = [];
+    },
   },
 });
 
 export const currentCart = (state: any) => state.cart.cart;
 
-export const { productAdded, productRemoved } = cartSlice.actions;
+export const { productAdded, productRemoved, checkout } = cartSlice.actions;
 
 export default cartSlice.reducer;
