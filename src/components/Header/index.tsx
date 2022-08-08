@@ -25,7 +25,7 @@ const Header = () => {
       <S.SyledLink to='/cart'>Cart: {cart.length}</S.SyledLink>
       <S.SyledLink to='/'>Home</S.SyledLink>
       {(userRole === 'editor' || userRole === 'admin') && (
-        <S.SyledLink to='/edit/product'>Edit Products</S.SyledLink>
+        <S.SyledLink to='/products/list'>Edit Products</S.SyledLink>
       )}
       {userRole === 'admin' && (
         <S.SyledLink to='/admin/users'>Edit Users</S.SyledLink>

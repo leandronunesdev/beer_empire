@@ -12,7 +12,7 @@ import {
 } from '../../state/ducks/categories';
 import * as S from './styles';
 
-const Home = () => {
+export const Home = () => {
   const token = localStorage.getItem('token');
   const { useAppDispatch, useAppSelector } = hooks;
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ const Home = () => {
   const cart = useAppSelector(currentCart);
 
   useEffect(() => {
-    if (token) {
+    if (token && !beers.length) {
       dispatch(getBeers(token));
       dispatch(getCategories(token));
     }

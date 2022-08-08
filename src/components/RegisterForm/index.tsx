@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { hooks } from '../../state';
 import { authOperations, authSelectors } from '../../state/ducks/auth';
 import * as S from './styles';

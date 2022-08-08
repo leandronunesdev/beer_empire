@@ -1,21 +1,28 @@
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useState } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import AlertDialog from '../../components/AlertDialog';
 
 import { hooks } from '../../state';
+import { authSelectors } from '../../state/ducks/auth';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
+import { checkout } from '../../state/ducks/cart/reducers';
 import * as S from './styles';
 
-const Edit = () => {
+export const Edit = () => {
   const { useAppSelector, useAppDispatch } = hooks;
   const { selectBeers } = beerSelectors;
   const { beers } = useAppSelector(selectBeers);
   const { deleteBeer } = beerOperations;
+  const { selectAuth } = authSelectors;
+  const { userRole } = useAppSelector(selectAuth);
 
   const dispatch = useAppDispatch();
 
   const [open, setOpen] = useState(false);
   const [selectedBeer, setSelectedBeer] = useState('');
+  const [editBeer, setEditBeer] = useState();
 
   const handleClickOpen = (beerId: any) => {
     setSelectedBeer(beerId);
@@ -36,15 +43,25 @@ const Edit = () => {
     handleClose();
   };
 
+  const handleEdit = (beer: any) => {
+    setEditBeer(beer);
+  };
+
+  useEffect(() => {
+    dispatch(checkout());
+  }, []);
+
   return (
     <S.BeersSection>
+      {editBeer && <Navigate to='/products/edit' state={{ beer: editBeer }} />}
+      <S.StyledLink to='/products/create'>Add Product</S.StyledLink>
       {beers.length ? (
         <>
           <S.CartHeader>
             <p>Product</p>
             <p>Description</p>
             <p>Price</p>
-            <p>Delete</p>
+            <p>Actions</p>
           </S.CartHeader>
 
           {beers.map((beer: any) => (
@@ -53,9 +70,14 @@ const Edit = () => {
               <p>{beer.title}</p>
               <p>{beer.description}</p>
               <p>$ {beer.price}</p>
-              <button onClick={() => handleClickOpen(beer.id)}>
-                <DeleteIcon />
+              <button onClick={() => handleEdit(beer)}>
+                <EditIcon />
               </button>
+              {userRole === 'admin' && (
+                <button onClick={() => handleClickOpen(beer.id)}>
+                  <DeleteIcon />
+                </button>
+              )}
             </S.ProductCard>
           ))}
           <AlertDialog

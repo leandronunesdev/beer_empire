@@ -33,10 +33,69 @@ const deleteBeer = createAsyncThunk(
       Authorization: `Bearer ${token}`,
     };
     try {
-      const response = await axios.delete(`${BEERS_URL}/${beerId}`, {
+      await axios.delete(`${BEERS_URL}/${beerId}`, {
         headers: headers,
       });
-      return response;
+      return beerId;
+    } catch (err: any) {
+      if (!(err as Record<string, string>).response) {
+        throw err;
+      }
+      return rejectWithValue({ message: err.message, type: 'error' });
+    }
+  }
+);
+
+const createBeer = createAsyncThunk(
+  'beers/createBeer',
+  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+    const { token } = store.getState().auth;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    try {
+      const { data } = await axios.post(BEERS_URL, params, {
+        headers: headers,
+      });
+      return { data };
+    } catch (err: any) {
+      if (!(err as Record<string, string>).response) {
+        throw err;
+      }
+      return rejectWithValue({ message: err.message, type: 'error' });
+    }
+  }
+);
+
+const updateBeer = createAsyncThunk(
+  'beers/updateBeer',
+  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+    const { idString, title, price, description, image } = params;
+
+    const updatedParams = {
+      title: title,
+      price: price,
+      description: description,
+      image: image,
+    };
+
+    const { token } = store.getState().auth;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    try {
+      const { data } = await axios.put(
+        `${BEERS_URL}/${idString}`,
+        updatedParams,
+        {
+          headers: headers,
+        }
+      );
+      return { data };
     } catch (err: any) {
       if (!(err as Record<string, string>).response) {
         throw err;
@@ -49,6 +108,8 @@ const deleteBeer = createAsyncThunk(
 const beerActions = {
   getBeers,
   deleteBeer,
+  createBeer,
+  updateBeer,
 };
 
 export default beerActions;

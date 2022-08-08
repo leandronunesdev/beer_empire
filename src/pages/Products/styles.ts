@@ -1,14 +1,35 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const BeersSection = styled.section`
   background: #f0f0f0;
   border-top: 8px solid #ffa935;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
   &:last-child {
     padding-bottom: 32px;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  background: #fc591f;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  margin: 32px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: #f46e42;
   }
 `;
 
@@ -24,7 +45,7 @@ export const ProductCard = styled.div`
   height: 135px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr 1fr 1fr 0.5fr 0.5fr;
   align-items: center;
   background: white;
 

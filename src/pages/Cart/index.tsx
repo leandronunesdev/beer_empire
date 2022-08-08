@@ -9,7 +9,7 @@ import {
 } from '../../state/ducks/cart/reducers';
 import * as S from './styles';
 
-const Cart = () => {
+export const Cart = () => {
   const { useAppDispatch, useAppSelector } = hooks;
   const dispatch = useAppDispatch();
 

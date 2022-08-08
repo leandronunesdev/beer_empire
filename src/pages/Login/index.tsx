@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+
 import LoginForm from '../../components/LoginForm';
 import RegisterForm from '../../components/RegisterForm';
 import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';
 import * as S from './styles';
 
-const Login = () => {
+export const Login = () => {
   const { useAppSelector } = hooks;
   const { selectAuth } = authSelectors;
   const { token } = useAppSelector(selectAuth);

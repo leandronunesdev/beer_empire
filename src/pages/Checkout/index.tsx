@@ -1,6 +1,6 @@
 import * as S from './styles';
 
-const Checkout = () => {
+export const Checkout = () => {
   return (
     <S.BeersSection>
       <p>Thank you for your purchase!</p>
