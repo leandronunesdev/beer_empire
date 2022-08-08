@@ -55,7 +55,7 @@ const Home = () => {
               <p>{beer.title}</p>
               <p>$ {beer.price}</p>
               {cart.find((cartBeer: any) => cartBeer.id === beer.id) ? (
-                <S.SpecialButton>
+                <S.SpecialButton key={beer.id}>
                   <button
                     onClick={() => dispatch(productRemoved({ id: beer.id }))}
                   >

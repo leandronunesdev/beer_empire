@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Edit from './pages/Edit/Edit';
+import Edit from './pages/Products';
 import AdminRoute from './modules/route-manager/AdminRoute';
 import Users from './pages/Users/Users';
 import Login from './pages/Login';
