@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 const AdminRoute = () => {
-  const role: any = localStorage.getItem('role');
+  const role = localStorage.getItem('role');
 
   return (
     <>

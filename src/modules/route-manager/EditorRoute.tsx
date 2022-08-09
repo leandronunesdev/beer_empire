@@ -3,13 +3,11 @@ import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';
 
 const EditorRoute = () => {
-  const { useAppSelector } = hooks;
-  const { selectAuth } = authSelectors;
-  const { userRole } = useAppSelector(selectAuth);
+  const role = localStorage.getItem('role');
 
   return (
     <>
-      {!(userRole === 'admin' || userRole === 'editor') && <Navigate to='/' />}
+      {!(role === 'admin' || role === 'editor') && <Navigate to='/' />}
       <Outlet />
     </>
   );

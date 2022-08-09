@@ -4,13 +4,15 @@ import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';
 
 const PrivateRoute = () => {
+  const token = localStorage.getItem('token');
+
   const { useAppSelector } = hooks;
   const { selectAuth } = authSelectors;
-  const { token } = useAppSelector(selectAuth);
+  const { isLogged } = useAppSelector(selectAuth);
 
   return (
     <>
-      {!token && <Navigate to='/login' />}
+      {(!token || !isLogged) && <Navigate to='/login' />}
       <Header />
       <Outlet />
     </>

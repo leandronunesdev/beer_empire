@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 import * as S from './styles';
 
 const Header = () => {
+  const role = localStorage.getItem('role');
+  const name = localStorage.getItem('user_name');
+
   const { logOut } = authOperations;
   const { useAppDispatch } = hooks;
-  const { useAppSelector } = hooks;
-  const { selectAuth } = authSelectors;
-  const { userName, userRole } = useAppSelector(selectAuth);
 
   const cart = useSelector(currentCart);
   const dispatch = useAppDispatch();
@@ -20,14 +20,14 @@ const Header = () => {
   return (
     <S.Wrapper>
       <S.StyledLogo />
-      <p>Welcome {userName}!</p>
-      <p>Your access level is: {userRole}</p>
+      <p>Welcome {name}!</p>
+      <p>Your access level is: {role}</p>
       <S.SyledLink to='/cart'>Cart: {cart.length}</S.SyledLink>
       <S.SyledLink to='/'>Home</S.SyledLink>
-      {(userRole === 'editor' || userRole === 'admin') && (
+      {(role === 'editor' || role === 'admin') && (
         <S.SyledLink to='/products/list'>Edit Products</S.SyledLink>
       )}
-      {userRole === 'admin' && (
+      {role === 'admin' && (
         <S.SyledLink to='/users/list'>Edit Users</S.SyledLink>
       )}
       <S.StyledButton onClick={() => dispatch(logOut())}>Logout</S.StyledButton>

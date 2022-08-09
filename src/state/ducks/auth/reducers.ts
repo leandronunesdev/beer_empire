@@ -7,6 +7,7 @@ export type AuthState = {
   isFetching: boolean;
   token?: Record<string, string>;
   error?: SerializedError;
+  isLogged: boolean;
 };
 
 const initialState: AuthState = {
@@ -15,6 +16,7 @@ const initialState: AuthState = {
   isFetching: false,
   token: undefined,
   error: undefined,
+  isLogged: false,
 };
 
 const authReducer = createReducer(initialState, (builder) => {
@@ -29,6 +31,7 @@ const authReducer = createReducer(initialState, (builder) => {
       state.userName = user.name;
       state.userRole = user.role;
       state.token = accessToken;
+      state.isLogged = true;
     })
     .addCase(actions.logIn.rejected, (state, action) => {
       state.isFetching = false;
@@ -39,6 +42,7 @@ const authReducer = createReducer(initialState, (builder) => {
       state.userName = undefined;
       state.userRole = undefined;
       state.token = undefined;
+      state.isLogged = false;
     })
     .addCase(actions.userRegister.pending, (state) => {
       state.isFetching = true;
@@ -50,6 +54,7 @@ const authReducer = createReducer(initialState, (builder) => {
       state.userName = user.name;
       state.userRole = user.role;
       state.token = accessToken;
+      state.isLogged = true;
     })
     .addCase(actions.userRegister.rejected, (state, action) => {
       state.isFetching = false;

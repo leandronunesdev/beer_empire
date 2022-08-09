@@ -11,6 +11,7 @@ import {
   Edit,
   Home,
   Login,
+  NotFound,
   Users,
 } from './pages';
 
@@ -30,9 +31,9 @@ function App() {
         <Route path='/users' element={<AdminRoute />}>
           <Route path='/users/list' element={<Users />} />
           <Route path='/users/create' element={<CreateUser />} />
-          <Route path='/users/edit' element={<CreateUser />} />
         </Route>
       </Route>
+      <Route path='*' element={<NotFound />} />
     </Routes>
   );
 }

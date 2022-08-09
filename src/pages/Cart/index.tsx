@@ -11,9 +11,9 @@ import * as S from './styles';
 
 export const Cart = () => {
   const { useAppDispatch, useAppSelector } = hooks;
-  const dispatch = useAppDispatch();
-
   const cart = useAppSelector(currentCart);
+
+  const dispatch = useAppDispatch();
 
   const [didCheckout, setDidCheckout] = useState(false);
 

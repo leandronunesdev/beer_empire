@@ -8,14 +8,16 @@ import { authSelectors } from '../../state/ducks/auth';
 import * as S from './styles';
 
 export const Login = () => {
+  const token = localStorage.getItem('token');
+  const [createAccount, setCreateAccount] = useState(false);
+
   const { useAppSelector } = hooks;
   const { selectAuth } = authSelectors;
-  const { token } = useAppSelector(selectAuth);
-  const [createAccount, setCreateAccount] = useState(false);
+  const { isLogged } = useAppSelector(selectAuth);
 
   return (
     <>
-      {token && <Navigate to='/' />}
+      {token && isLogged && <Navigate to='/' />}
       <S.Wrapper>
         <S.StyledLogo />
         {createAccount ? (
