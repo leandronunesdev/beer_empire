@@ -1,8 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AdminRoute from './modules/route-manager/AdminRoute';
-import PrivateRoute from './modules/route-manager/PrivateRoute';
-import EditorRoute from './modules/route-manager/EditorRoute';
+import {
+  AdminRoute,
+  EditorRoute,
+  PrivateRoute,
+} from './components/modules/route-manager';
 import {
   Cart,
   Checkout,

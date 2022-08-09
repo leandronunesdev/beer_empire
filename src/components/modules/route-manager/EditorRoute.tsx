@@ -1,14 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-const AdminRoute = () => {
+export const EditorRoute = () => {
   const role = localStorage.getItem('role');
 
   return (
     <>
-      {role !== 'admin' && <Navigate to='/' />}
+      {!(role === 'admin' || role === 'editor') && <Navigate to='/' />}
       <Outlet />
     </>
   );
 };
-
-export default AdminRoute;

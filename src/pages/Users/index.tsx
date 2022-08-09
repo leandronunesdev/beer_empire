@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AlertDialog from '../../components/AlertDialog';
 
 import { hooks } from '../../state';
 import { userOperations } from '../../state/ducks/users';
 import usersActions from '../../state/ducks/users/actions';
 import usersSelectors from '../../state/ducks/users/selectors';
+import { AlertDialog } from '../../components';
 
 import * as S from './styles';
 

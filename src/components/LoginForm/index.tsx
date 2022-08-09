@@ -3,7 +3,7 @@ import { hooks } from '../../state';
 import { authOperations, authSelectors } from '../../state/ducks/auth';
 import * as S from './styles';
 
-const LoginForm = () => {
+export const LoginForm = () => {
   const { logIn } = authOperations;
   const { useAppDispatch, useAppSelector } = hooks;
   const { selectAuth } = authSelectors;

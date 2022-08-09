@@ -1,9 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import Header from '../../components/Header';
-import { hooks } from '../../state';
-import { authSelectors } from '../../state/ducks/auth';
 
-const PrivateRoute = () => {
+import Header from '../../Header';
+import { hooks } from '../../../state';
+import { authSelectors } from '../../../state/ducks/auth';
+
+export const PrivateRoute = () => {
   const token = localStorage.getItem('token');
 
   const { useAppSelector } = hooks;
@@ -18,5 +19,3 @@ const PrivateRoute = () => {
     </>
   );
 };
-
-export default PrivateRoute;

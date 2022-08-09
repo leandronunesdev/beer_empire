@@ -2,7 +2,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import AlertDialog from '../../components/AlertDialog';
+import { AlertDialog } from '../../components';
 
 import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';

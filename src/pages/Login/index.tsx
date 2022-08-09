@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import LoginForm from '../../components/LoginForm';
-import RegisterForm from '../../components/RegisterForm';
 import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';
+import { LoginForm, RegisterForm } from '../../components';
+
 import * as S from './styles';
 
 export const Login = () => {
