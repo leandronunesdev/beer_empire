@@ -1,11 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const UsersSection = styled.section`
-  background: #f0f0f0;
-  border-top: 8px solid #ffa935;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => css`
+    background: ${theme.colors.grey};
+    border-top: 8px solid ${theme.colors.orange};
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  `}
 `;
 
 export const StyledForm = styled.form`
@@ -20,24 +22,6 @@ export const StyledInput = styled.input`
   padding: 16px;
   border: grey 0.5px solid;
   border-radius: 4px;
-`;
-
-export const StyledButton = styled.button`
-  margin: 8px;
-  padding: 16px;
-  color: white;
-  border: none;
-  background: #96b6e0;
-  border-radius: 4px;
-
-  &:enabled {
-    background: #1b66ca;
-    cursor: pointer;
-  }
-
-  &:enabled:hover {
-    background: #2579e8;
-  }
 `;
 
 export const StyledError = styled.p`

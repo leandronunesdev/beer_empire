@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BeerEmpireLogo } from '../../assets/images';
 
 export const Wrapper = styled.div`
@@ -16,15 +16,17 @@ export const Wrapper = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: white;
-  color: #3181ea;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  &:hover {
-    color: #1b66ca;
-  }
+  ${({ theme }) => css`
+    background-color: white;
+    color: ${theme.colors.blue};
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      color: ${theme.colors.darkBlue};
+    }
+  `}
 `;
 
 export const StyledLogo = styled(BeerEmpireLogo)`

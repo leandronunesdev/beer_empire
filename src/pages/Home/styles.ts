@@ -1,8 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const CategoriesSection = styled.section`
-  border-bottom: 8px solid #ffa935;
-  background: white;
+  ${({ theme }) => css`
+    border-bottom: 8px solid ${theme.colors.orange};
+    background: white;
+  `}
 `;
 
 export const CategoriesList = styled.ul`
@@ -15,43 +17,47 @@ export const CategoriesList = styled.ul`
 `;
 
 export const BeersSection = styled.section`
-  display: flex;
-  flex-flow: row wrap;
-  background: #f0f0f0;
+  ${({ theme }) => css`
+    display: flex;
+    flex-flow: row wrap;
+    background: ${theme.colors.grey};
+  `}
 `;
 
 export const ProductCard = styled.div`
-  width: 200px;
-  height: 400px;
-  border-radius: 8px;
-  margin: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background: white;
-  justify-content: space-between;
-
-  img {
-    max-width: 80%;
-    max-height: 176px;
-    margin-top: 16px;
-  }
-
-  button {
-    background: #fc591f;
-    border: none;
-    padding: 16px;
-    color: white;
+  ${({ theme }) => css`
+    width: 200px;
+    height: 400px;
     border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 16px;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    justify-content: space-between;
 
-    &:hover {
-      background: #f46e42;
+    img {
+      max-width: 80%;
+      max-height: 176px;
+      margin-top: 16px;
     }
-  }
+
+    button {
+      background: ${theme.colors.darkOrange};
+      border: none;
+      padding: 16px;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 16px;
+
+      &:hover {
+        background: ${theme.colors.lightOrange};
+      }
+    }
+  `}
 `;
 
 export const SpecialButton = styled.div`

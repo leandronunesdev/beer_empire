@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '..';
 import { hooks } from '../../state';
 import { authOperations, authSelectors } from '../../state/ducks/auth';
 import * as S from './styles';
@@ -56,7 +57,7 @@ export const LoginForm = () => {
             Login failed! Please, check your credentials
           </S.StyledError>
         )}
-        <S.StyledButton disabled={!canLogin}>Login</S.StyledButton>
+        <Button disabled={!canLogin} label='Login' />
       </S.StyledForm>
     </>
   );

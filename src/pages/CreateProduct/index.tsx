@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { Button } from '../../components';
 import { hooks } from '../../state';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
 import * as S from './styles';
@@ -112,7 +113,7 @@ export const CreateProduct = () => {
           required
         />
         {error && <S.StyledError>{error.message}</S.StyledError>}
-        <S.StyledButton disabled={!canSave}>Save product</S.StyledButton>
+        <Button disabled={!canSave} label='Save product' />
       </S.StyledForm>
       {addedBeer && !error && <Navigate to='/products/list' />}
     </S.BeersSection>

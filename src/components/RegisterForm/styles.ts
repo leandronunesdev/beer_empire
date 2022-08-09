@@ -12,24 +12,6 @@ export const StyledInput = styled.input`
   border-radius: 4px;
 `;
 
-export const StyledButton = styled.button`
-  margin: 8px;
-  padding: 16px;
-  color: white;
-  border: none;
-  background: #96b6e0;
-  border-radius: 4px;
-
-  &:enabled {
-    background: #1b66ca;
-    cursor: pointer;
-  }
-
-  &:enabled:hover {
-    background: #2579e8;
-  }
-`;
-
 export const StyledError = styled.p`
   color: red;
   align-self: center;

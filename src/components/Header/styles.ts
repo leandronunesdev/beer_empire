@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BeerEmpireLogo } from '../../assets/images';
 
 export const Wrapper = styled.div`
@@ -15,20 +15,24 @@ export const StyledLogo = styled(BeerEmpireLogo)`
 `;
 
 export const SyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  &:hover {
-    border-bottom: 3px solid #ffc147;
-  }
+  ${({ theme }) => css`
+    text-decoration: none;
+    color: black;
+    &:hover {
+      border-bottom: 3px solid ${theme.colors.yellow};
+    }
+  `}
 `;
 
 export const StyledButton = styled.button`
-  background: #ffc147;
-  border: none;
-  padding: 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  &:hover {
-    background: #f4ad29;
-  }
+  ${({ theme }) => css`
+    background: ${theme.colors.yellow};
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      background: ${theme.colors.darkYellow};
+    }
+  `}
 `;

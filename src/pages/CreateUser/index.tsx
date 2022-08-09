@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Button } from '../../components';
 
 import { hooks } from '../../state';
 import { userOperations, userSelectors } from '../../state/ducks/users';
@@ -84,7 +85,7 @@ export const CreateUser = () => {
           required
         />
         {error && <S.StyledError>{error.message}</S.StyledError>}
-        <S.StyledButton disabled={!canSave}>Save user</S.StyledButton>
+        <Button disabled={!canSave} label='Save user' />
       </S.StyledForm>
       {addedUser && !error && <Navigate to='/users/list' />}
     </S.UsersSection>

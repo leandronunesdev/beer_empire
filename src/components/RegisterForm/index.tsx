@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '..';
 import { hooks } from '../../state';
 import { authOperations, authSelectors } from '../../state/ducks/auth';
 import * as S from './styles';
@@ -80,7 +81,7 @@ export const RegisterForm = () => {
         <p>You must be 18 or older to use this website</p>
         {error && <S.StyledError>{error.message}</S.StyledError>}
         {ageError && <S.StyledError>{ageError}</S.StyledError>}
-        <S.StyledButton disabled={!canSave}>Register</S.StyledButton>
+        <Button disabled={!canSave} label='Register' />
       </S.StyledForm>
     </>
   );
