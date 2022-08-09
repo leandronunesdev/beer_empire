@@ -4,4 +4,5 @@ export * from './CreateProduct';
 export * from './Home';
 export * from './Login';
 export * from './Products';
-// export * from './Users';
+export * from './Users';
+export * from './CreateUser';

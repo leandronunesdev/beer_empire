@@ -1,10 +1,18 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AdminRoute from './modules/route-manager/AdminRoute';
-import Users from './pages/Users/Users';
 import PrivateRoute from './modules/route-manager/PrivateRoute';
 import EditorRoute from './modules/route-manager/EditorRoute';
-import { Cart, Checkout, CreateProduct, Edit, Home, Login } from './pages';
+import {
+  Cart,
+  Checkout,
+  CreateProduct,
+  CreateUser,
+  Edit,
+  Home,
+  Login,
+  Users,
+} from './pages';
 
 function App() {
   return (
@@ -19,8 +27,10 @@ function App() {
           <Route path='/products/create' element={<CreateProduct />} />
           <Route path='/products/edit' element={<CreateProduct />} />
         </Route>
-        <Route path='/admin' element={<AdminRoute />}>
-          <Route path='/admin/users' element={<Users />} />
+        <Route path='/users' element={<AdminRoute />}>
+          <Route path='/users/list' element={<Users />} />
+          <Route path='/users/create' element={<CreateUser />} />
+          <Route path='/users/edit' element={<CreateUser />} />
         </Route>
       </Route>
     </Routes>

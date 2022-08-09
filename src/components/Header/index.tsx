@@ -28,7 +28,7 @@ const Header = () => {
         <S.SyledLink to='/products/list'>Edit Products</S.SyledLink>
       )}
       {userRole === 'admin' && (
-        <S.SyledLink to='/admin/users'>Edit Users</S.SyledLink>
+        <S.SyledLink to='/users/list'>Edit Users</S.SyledLink>
       )}
       <S.StyledButton onClick={() => dispatch(logOut())}>Logout</S.StyledButton>
     </S.Wrapper>
