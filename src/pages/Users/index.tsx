@@ -7,7 +7,7 @@ import AlertDialog from '../../components/AlertDialog';
 import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
-import { checkout } from '../../state/ducks/cart/reducers';
+
 import { userOperations } from '../../state/ducks/users';
 import usersActions from '../../state/ducks/users/actions';
 import usersSelectors from '../../state/ducks/users/selectors';
@@ -25,7 +25,6 @@ export const Users = () => {
 
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState('');
-  const [editUser, setEditUser] = useState();
 
   useEffect(() => {
     if (token && !users.length) {
@@ -50,10 +49,6 @@ export const Users = () => {
   const handleConfirm = () => {
     dispatch(deleteUser(selectedUser));
     handleClose();
-  };
-
-  const handleEdit = (user: any) => {
-    setEditUser(user);
   };
 
   return (

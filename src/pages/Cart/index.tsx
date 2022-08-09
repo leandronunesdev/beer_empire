@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { hooks } from '../../state';
-import {
-  checkout,
-  currentCart,
-  productAdded,
-  productRemoved,
-} from '../../state/ducks/cart/reducers';
+import { cartOperations, cartSelectors } from '../../state/ducks/cart';
+
 import * as S from './styles';
 
 export const Cart = () => {
   const { useAppDispatch, useAppSelector } = hooks;
-  const cart = useAppSelector(currentCart);
 
   const dispatch = useAppDispatch();
+
+  const { productAdded, productRemoved, checkout } = cartOperations;
+  const { selectCart } = cartSelectors;
+  const { cart } = useAppSelector(selectCart);
 
   const [didCheckout, setDidCheckout] = useState(false);
 

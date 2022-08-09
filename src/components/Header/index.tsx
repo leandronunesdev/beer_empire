@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { currentCart } from '../../state/ducks/cart/reducers';
 import { hooks } from '../../state';
-import { authOperations, authSelectors } from '../../state/ducks/auth';
-import { Link } from 'react-router-dom';
+import { authOperations } from '../../state/ducks/auth';
+import { cartSelectors } from '../../state/ducks/cart';
 
 import * as S from './styles';
 
@@ -12,9 +11,10 @@ const Header = () => {
   const name = localStorage.getItem('user_name');
 
   const { logOut } = authOperations;
-  const { useAppDispatch } = hooks;
+  const { useAppDispatch, useAppSelector } = hooks;
 
-  const cart = useSelector(currentCart);
+  const { selectCart } = cartSelectors;
+  const { cart } = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
 
   return (
@@ -36,3 +36,6 @@ const Header = () => {
 };
 
 export default Header;
+function useAppSelector(selectCart: (state: any) => any): { cart: any } {
+  throw new Error('Function not implemented.');
+}

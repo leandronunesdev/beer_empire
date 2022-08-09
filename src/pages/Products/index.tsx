@@ -7,7 +7,8 @@ import AlertDialog from '../../components/AlertDialog';
 import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
-import { checkout } from '../../state/ducks/cart/reducers';
+import { cartOperations } from '../../state/ducks/cart';
+
 import * as S from './styles';
 
 export const Edit = () => {
@@ -17,6 +18,7 @@ export const Edit = () => {
   const { deleteBeer } = beerOperations;
   const { selectAuth } = authSelectors;
   const { userRole } = useAppSelector(selectAuth);
+  const { checkout } = cartOperations;
 
   const dispatch = useAppDispatch();
 

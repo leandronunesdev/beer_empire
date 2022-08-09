@@ -25,10 +25,6 @@ export const CreateUser = () => {
 
   const canSave = [name, email, role, password].every(Boolean);
 
-  useEffect(() => {
-    console.log(name, email, role, password);
-  }, [name, email, role, password]);
-
   const handleUserCreation = (e: any) => {
     e.preventDefault();
 

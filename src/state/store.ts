@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from './ducks/cart/reducers';
 import authReducer from './ducks/auth/reducers';
 import beersReducer from './ducks/beers/reducers';
+import cartReducer from './ducks/cart/reducers';
 import categoriesReducer from './ducks/categories/reducers';
 import usersReducer from './ducks/users/reducers';
 

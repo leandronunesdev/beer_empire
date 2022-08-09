@@ -1,9 +1,4 @@
 import React, { useEffect } from 'react';
-import {
-  currentCart,
-  productAdded,
-  productRemoved,
-} from '../../state/ducks/cart/reducers';
 import { hooks } from '../../state';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
 import {
@@ -11,6 +6,7 @@ import {
   categoriesSelectors,
 } from '../../state/ducks/categories';
 import * as S from './styles';
+import { cartOperations, cartSelectors } from '../../state/ducks/cart';
 
 export const Home = () => {
   const token = localStorage.getItem('token');
@@ -25,7 +21,9 @@ export const Home = () => {
   const { selectCategories } = categoriesSelectors;
   const { categories } = useAppSelector(selectCategories);
 
-  const cart = useAppSelector(currentCart);
+  const { productAdded, productRemoved } = cartOperations;
+  const { selectCart } = cartSelectors;
+  const { cart } = useAppSelector(selectCart);
 
   useEffect(() => {
     if (token && !beers.length) {

@@ -1,14 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createReducer, createSlice, SerializedError } from '@reduxjs/toolkit';
+import actions from './actions';
 
-const initialState = {
-  cart: [],
+export type CartState = {
+  cart: any;
+  isFetching: boolean;
+  error?: SerializedError;
 };
 
-const cartSlice = createSlice({
-  name: 'cart',
-  initialState,
-  reducers: {
-    productAdded(state: any, action) {
+const initialState: CartState = {
+  cart: [],
+  isFetching: false,
+  error: undefined,
+};
+
+const cartReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(actions.productAdded.pending, (state) => {
+      state.isFetching = true;
+    })
+    .addCase(actions.productAdded.fulfilled, (state, action: any) => {
       const { id } = action.payload;
       const existingProduct = state.cart.find((beer: any) => beer.id === id);
       if (existingProduct) {
@@ -16,8 +26,17 @@ const cartSlice = createSlice({
       } else {
         state.cart.push(action.payload);
       }
-    },
-    productRemoved(state: any, action) {
+      state.isFetching = false;
+      state.error = undefined;
+    })
+    .addCase(actions.productAdded.rejected, (state, action) => {
+      state.isFetching = false;
+      state.error = action.error;
+    })
+    .addCase(actions.productRemoved.pending, (state) => {
+      state.isFetching = true;
+    })
+    .addCase(actions.productRemoved.fulfilled, (state, action: any) => {
       const { id } = action.payload;
       const existingProduct = state.cart.find((beer: any) => beer.id === id);
 
@@ -30,15 +49,25 @@ const cartSlice = createSlice({
         state.cart = cart;
         return;
       }
-    },
-    checkout(state: any) {
+      state.isFetching = false;
+      state.error = undefined;
+    })
+    .addCase(actions.productRemoved.rejected, (state, action) => {
+      state.isFetching = false;
+      state.error = action.error;
+    })
+    .addCase(actions.checkout.pending, (state) => {
+      state.isFetching = true;
+    })
+    .addCase(actions.checkout.fulfilled, (state, action: any) => {
       state.cart = [];
-    },
-  },
+      state.isFetching = false;
+      state.error = undefined;
+    })
+    .addCase(actions.checkout.rejected, (state, action) => {
+      state.isFetching = false;
+      state.error = action.error;
+    });
 });
 
-export const currentCart = (state: any) => state.cart.cart;
-
-export const { productAdded, productRemoved, checkout } = cartSlice.actions;
-
-export default cartSlice.reducer;
+export default cartReducer;
