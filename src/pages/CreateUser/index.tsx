@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+
 import { hooks } from '../../state';
 import { userOperations, userSelectors } from '../../state/ducks/users';
 

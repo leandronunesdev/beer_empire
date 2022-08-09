@@ -1,13 +1,13 @@
 import { createReducer, SerializedError } from '@reduxjs/toolkit';
 import actions from './actions';
 
-export type AuthState = {
+export type CategoriesState = {
   categories: any;
   isFetching: boolean;
   error?: SerializedError;
 };
 
-const initialState: AuthState = {
+const initialState: CategoriesState = {
   categories: [],
   isFetching: false,
   error: undefined,

@@ -51,7 +51,7 @@ export const Edit = () => {
 
   useEffect(() => {
     dispatch(checkout());
-  }, []);
+  }, [dispatch, checkout]);
 
   return (
     <S.BeersSection>

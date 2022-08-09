@@ -1,16 +1,12 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
 import AlertDialog from '../../components/AlertDialog';
 
 import { hooks } from '../../state';
-import { authSelectors } from '../../state/ducks/auth';
-import { beerOperations, beerSelectors } from '../../state/ducks/beers';
-
 import { userOperations } from '../../state/ducks/users';
 import usersActions from '../../state/ducks/users/actions';
 import usersSelectors from '../../state/ducks/users/selectors';
+
 import * as S from './styles';
 
 export const Users = () => {
@@ -30,7 +26,7 @@ export const Users = () => {
     if (token && !users.length) {
       dispatch(getUsers(token));
     }
-  }, [dispatch]);
+  }, [token, users, dispatch, getUsers]);
 
   const handleClickOpen = (userId: any) => {
     setSelectedUser(userId);

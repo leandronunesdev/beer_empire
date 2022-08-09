@@ -6,7 +6,7 @@ const USERS_URL = 'http://localhost:4000/users';
 
 const getUsers = createAsyncThunk(
   'users/getUsers',
-  async (token: any, { rejectWithValue, dispatch }) => {
+  async (token: any, { rejectWithValue }) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -26,7 +26,7 @@ const getUsers = createAsyncThunk(
 
 const deleteUser = createAsyncThunk(
   'users/deleteUser',
-  async (userId: any, { rejectWithValue, dispatch }) => {
+  async (userId: any, { rejectWithValue }) => {
     const { token } = store.getState().auth;
 
     const headers = {
@@ -48,7 +48,7 @@ const deleteUser = createAsyncThunk(
 
 const createUser = createAsyncThunk(
   'users/createUser',
-  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+  async (params: Record<string, string>, { rejectWithValue }) => {
     const { token } = store.getState().auth;
 
     const headers = {
@@ -71,7 +71,7 @@ const createUser = createAsyncThunk(
 
 const updateUser = createAsyncThunk(
   'users/updateUser',
-  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+  async (params: Record<string, string>, { rejectWithValue }) => {
     const { idString, name, email, role, password } = params;
 
     const updatedParams = {

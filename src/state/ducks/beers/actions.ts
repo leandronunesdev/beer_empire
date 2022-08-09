@@ -6,7 +6,7 @@ const BEERS_URL = 'http://localhost:4000/beers';
 
 const getBeers = createAsyncThunk(
   'beers/getBeers',
-  async (token: any, { rejectWithValue, dispatch }) => {
+  async (token: any, { rejectWithValue }) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -26,7 +26,7 @@ const getBeers = createAsyncThunk(
 
 const deleteBeer = createAsyncThunk(
   'beers/deleteBeer',
-  async (beerId: any, { rejectWithValue, dispatch }) => {
+  async (beerId: any, { rejectWithValue }) => {
     const { token } = store.getState().auth;
 
     const headers = {
@@ -48,7 +48,7 @@ const deleteBeer = createAsyncThunk(
 
 const createBeer = createAsyncThunk(
   'beers/createBeer',
-  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+  async (params: Record<string, string>, { rejectWithValue }) => {
     const { token } = store.getState().auth;
 
     const headers = {
@@ -71,7 +71,7 @@ const createBeer = createAsyncThunk(
 
 const updateBeer = createAsyncThunk(
   'beers/updateBeer',
-  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+  async (params: Record<string, string>, { rejectWithValue }) => {
     const { idString, title, price, description, image } = params;
 
     const updatedParams = {

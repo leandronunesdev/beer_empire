@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+
 import { hooks } from '../../state';
 import { authOperations } from '../../state/ducks/auth';
 import { cartSelectors } from '../../state/ducks/cart';
@@ -10,12 +10,12 @@ const Header = () => {
   const role = localStorage.getItem('role');
   const name = localStorage.getItem('user_name');
 
-  const { logOut } = authOperations;
   const { useAppDispatch, useAppSelector } = hooks;
+  const dispatch = useAppDispatch();
 
+  const { logOut } = authOperations;
   const { selectCart } = cartSelectors;
   const { cart } = useAppSelector(selectCart);
-  const dispatch = useAppDispatch();
 
   return (
     <S.Wrapper>
@@ -36,6 +36,3 @@ const Header = () => {
 };
 
 export default Header;
-function useAppSelector(selectCart: (state: any) => any): { cart: any } {
-  throw new Error('Function not implemented.');
-}

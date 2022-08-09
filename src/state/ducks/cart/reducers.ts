@@ -1,4 +1,4 @@
-import { createReducer, createSlice, SerializedError } from '@reduxjs/toolkit';
+import { createReducer, SerializedError } from '@reduxjs/toolkit';
 import actions from './actions';
 
 export type CartState = {

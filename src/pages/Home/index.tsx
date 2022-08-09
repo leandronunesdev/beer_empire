@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+
 import { hooks } from '../../state';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
 import {
   categoriesOperations,
   categoriesSelectors,
 } from '../../state/ducks/categories';
-import * as S from './styles';
 import { cartOperations, cartSelectors } from '../../state/ducks/cart';
+
+import * as S from './styles';
 
 export const Home = () => {
   const token = localStorage.getItem('token');
@@ -30,7 +32,7 @@ export const Home = () => {
       dispatch(getBeers(token));
       dispatch(getCategories(token));
     }
-  }, [dispatch]);
+  }, [token, beers, dispatch, getBeers, getCategories]);
 
   return (
     <>

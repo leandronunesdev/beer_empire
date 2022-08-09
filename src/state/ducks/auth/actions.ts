@@ -6,7 +6,7 @@ const REG_URL = 'http://localhost:4000/register';
 
 const logIn = createAsyncThunk(
   'auth/Login',
-  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+  async (params: Record<string, string>, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(AUTH_URL, params);
       localStorage.setItem('token', data.accessToken);
@@ -29,7 +29,7 @@ const logOut = createAsyncThunk('auth/logOut', async (message?: string) => {
 
 const userRegister = createAsyncThunk(
   'auth/Register',
-  async (params: Record<string, string>, { rejectWithValue, dispatch }) => {
+  async (params: Record<string, string>, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(REG_URL, params);
       localStorage.setItem('token', data.accessToken);
