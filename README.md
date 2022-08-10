@@ -43,6 +43,11 @@ Besides that, is good to have a good code editor as [VSCode](https://code.visual
 # Clone the backend repository and run the fake api according to the instructions
 $ git clone <https://github.com/leandronunesdev/fake-api-emporio>
 
+```
+
+### 🎲 Running the Frontend (server)
+
+```bash
 # Clone this repository
 $ git clone <https://github.com/leandronunesdev/emporio>
 
@@ -58,11 +63,20 @@ $ npm start
 # The server will start on port:3000 - access <http://localhost:3000>
 ```
 
+## Login credentials
+
+# Admin
+
+- email: helen@facebook.com | password: 123123
+
+# Editor
+
+- email: mauricio@google.com | password: 123123
+
 <h1 id="technologies">🛠 Technologies</h1>
 
 The following tools were used on this project:
 
-- [Node.js](https://nodejs.org/en/)
 - [React](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Redux](https://redux.js.org/)
@@ -76,9 +90,11 @@ The following tools were used on this project:
  <br />
  <sub><b>Leandro Nunes</b></sub></a> <a href="https://github.com/leandronunesdev" title="Leandro">🚀</a>
 
-Made with ❤️ by Leandro Nunes 👋🏽 Reach out!
+Made with ❤️ by Leandro Nunes
 
-<a href="https://leandronunes.dev/">Website<a>
-<a href="https://www.linkedin.com/in/nunesprofissional/">Linkedin<a>
-<a href="mailto:https://www.linkedin.com/in/nunesprofissional/">E-mail<a>
+👋🏽 Reach out!
+
+<a href="https://leandronunes.dev/">Website<a> |
+<a href="https://www.linkedin.com/in/nunesprofissional/">Linkedin<a> |
+<a href="mailto:https://www.linkedin.com/in/nunesprofissional/">E-mail<a> |
 <a href="https://twitter.com/leandro_nunes">Twitter<a>
