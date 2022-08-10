@@ -53,6 +53,7 @@ export const LoginForm = () => {
           onChange={onPasswordChanged}
           placeholder='Password'
           required
+          autoComplete='on'
         />
         {error && (
           <S.StyledError>

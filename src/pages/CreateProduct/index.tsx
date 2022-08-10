@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from '../../components';
 import { hooks } from '../../state';
@@ -20,6 +20,8 @@ export const CreateProduct = () => {
   const [image, setImage] = useState('');
   const [id, setId] = useState(0);
   const [addedBeer, setAddedBeer] = useState(false);
+
+  const navigate = useNavigate();
 
   const onTitleChanged = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
@@ -120,6 +122,7 @@ export const CreateProduct = () => {
         />
         {error && <S.StyledError>{error.message}</S.StyledError>}
         <Button disabled={!canSave} label='Save product' />
+        <S.CancelButton onClick={() => navigate(-1)}>Cancel</S.CancelButton>
       </S.StyledForm>
       {addedBeer && !error && <Navigate to='/products/list' />}
     </S.BeersSection>

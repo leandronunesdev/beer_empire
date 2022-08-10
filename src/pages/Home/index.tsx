@@ -41,10 +41,7 @@ export const Home = () => {
         <S.CategoriesList>
           {categories &&
             categories.map((category: string) => (
-              <>
-                <li key={category}>{category}</li>
-                <div>|</div>
-              </>
+              <li key={category}>{category}</li>
             ))}
         </S.CategoriesList>
       </S.CategoriesSection>

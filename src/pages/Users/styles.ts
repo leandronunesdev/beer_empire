@@ -5,7 +5,7 @@ export const UsersSection = styled.section`
   ${({ theme }) => css`
     background: ${theme.colors.grey};
     border-top: 8px solid ${theme.colors.orange};
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 

@@ -28,3 +28,19 @@ export const StyledError = styled.p`
   color: red;
   align-self: center;
 `;
+
+export const CancelButton = styled.p`
+  ${({ theme }) => css`
+    margin: 8px;
+    padding: 16px;
+    color: white;
+    background: ${theme.colors.red};
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background: ${theme.colors.lightRed};
+    }
+  `}
+`;

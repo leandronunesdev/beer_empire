@@ -81,6 +81,7 @@ export const RegisterForm = () => {
           onChange={onPasswordChanged}
           placeholder='Password'
           required
+          autoComplete='on'
         />
         <p>You must be 18 or older to use this website</p>
         {error && <S.StyledError>{error.message}</S.StyledError>}

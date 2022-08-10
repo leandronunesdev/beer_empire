@@ -15,6 +15,8 @@ export const Theme = {
     lightOrange: '#f46e42',
     green: '#35c85c',
     lightGreen: '#3cd863',
+    red: '#f26868',
+    lightRed: '#f47a7a',
   },
 };
 

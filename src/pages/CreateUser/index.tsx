@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { Button } from '../../components';
 import { hooks } from '../../state';
@@ -28,6 +28,8 @@ export const CreateUser = () => {
     setRole(e.target.value);
   const onPasswordChanged = (e: ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
+
+  const navigate = useNavigate();
 
   const canSave = [name, email, role, password].every(Boolean);
 
@@ -70,9 +72,9 @@ export const CreateUser = () => {
           id='role'
           name='role'
           onChange={onRoleChanged}
-          value={role}
+          defaultValue='placeholder'
         >
-          <option value='' disabled selected>
+          <option value='placeholder' disabled>
             Select user role
           </option>
           <option value='admin'>Administrator</option>
@@ -87,9 +89,11 @@ export const CreateUser = () => {
           onChange={onPasswordChanged}
           placeholder='User password'
           required
+          autoComplete='off'
         />
         {error && <S.StyledError>{error.message}</S.StyledError>}
         <Button disabled={!canSave} label='Save user' />
+        <S.CancelButton onClick={() => navigate(-1)}>Cancel</S.CancelButton>
       </S.StyledForm>
       {addedUser && !error && <Navigate to='/users/list' />}
     </S.UsersSection>

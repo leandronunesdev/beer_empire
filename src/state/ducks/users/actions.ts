@@ -26,7 +26,7 @@ const getUsers = createAsyncThunk(
 
 const deleteUser = createAsyncThunk(
   'users/deleteUser',
-  async (userId: any, { rejectWithValue }) => {
+  async (userId: number, { rejectWithValue }) => {
     const { token } = store.getState().auth;
 
     const headers = {

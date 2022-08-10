@@ -44,7 +44,9 @@ export const Users = () => {
   };
 
   const handleConfirm = () => {
-    dispatch(deleteUser(selectedUserId));
+    if (selectedUserId) {
+      dispatch(deleteUser(selectedUserId));
+    }
     handleClose();
   };
 
