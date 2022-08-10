@@ -43,7 +43,7 @@ export const Home = () => {
             categories.map((category: string) => (
               <>
                 <li key={category}>{category}</li>
-                <li>|</li>
+                <div>|</div>
               </>
             ))}
         </S.CategoriesList>
@@ -56,7 +56,7 @@ export const Home = () => {
               <p>{beer.title}</p>
               <p>$ {beer.price}</p>
               {cart.find((cartBeer: ProductType) => cartBeer.id === beer.id) ? (
-                <S.SpecialButton key={beer.id}>
+                <S.SpecialButton>
                   <button onClick={() => dispatch(productRemoved(beer.id))}>
                     -
                   </button>
