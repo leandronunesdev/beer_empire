@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+
+import { ProductCartType } from '../../constants/genericTypes';
 import { hooks } from '../../state';
 import { cartOperations, cartSelectors } from '../../state/ducks/cart';
 
@@ -16,10 +18,10 @@ export const Cart = () => {
 
   const [didCheckout, setDidCheckout] = useState(false);
 
-  const cartTotal: any = [];
+  const cartTotal: number[] = [];
 
-  const calcProductTotal = (price: any, quantity: any) => {
-    const total = price * quantity;
+  const calcProductTotal = (price: string, quantity: number) => {
+    const total = parseInt(price, 10) * quantity;
     cartTotal.push(total);
 
     return total.toFixed(2);
@@ -41,15 +43,13 @@ export const Cart = () => {
             <p>Total</p>
           </S.CartHeader>
 
-          {cart.map((cartItem: any) => (
+          {cart.map((cartItem: ProductCartType) => (
             <S.ProductCart key={cartItem.id}>
               <img src={cartItem.image} alt={cartItem.title} />
               <p>{cartItem.title}</p>
               <p>$ {cartItem.price}</p>
               <S.SpecialButton>
-                <button
-                  onClick={() => dispatch(productRemoved({ id: cartItem.id }))}
-                >
+                <button onClick={() => dispatch(productRemoved(cartItem.id))}>
                   -
                 </button>
                 <p>{cartItem.quantity}</p>

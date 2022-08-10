@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+
 import { Button } from '../../components';
 import { hooks } from '../../state';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
+
 import * as S from './styles';
 
 export const CreateProduct = () => {
@@ -19,10 +21,14 @@ export const CreateProduct = () => {
   const [id, setId] = useState(0);
   const [addedBeer, setAddedBeer] = useState(false);
 
-  const onTitleChanged = (e: any) => setTitle(e.target.value);
-  const onPriceChanged = (e: any) => setPrice(e.target.value);
-  const onDescriptionChanged = (e: any) => setDescription(e.target.value);
-  const onImageChanged = (e: any) => setImage(e.target.value);
+  const onTitleChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setTitle(e.target.value);
+  const onPriceChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setPrice(e.target.value);
+  const onDescriptionChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setDescription(e.target.value);
+  const onImageChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setImage(e.target.value);
 
   const canSave = [title, price, description, image].every(Boolean);
 
@@ -50,7 +56,7 @@ export const CreateProduct = () => {
     }
   }, [state]);
 
-  const handleBeerCreation = (e: any) => {
+  const handleBeerCreation = (e: FormEvent) => {
     e.preventDefault();
 
     const params = {

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { ProductType } from '../../constants/genericTypes';
 import { hooks } from '../../state';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
 import {
@@ -39,7 +40,7 @@ export const Home = () => {
       <S.CategoriesSection>
         <S.CategoriesList>
           {categories &&
-            categories.map((category: any) => (
+            categories.map((category: string) => (
               <>
                 <li key={category}>{category}</li>
                 <li>|</li>
@@ -49,22 +50,21 @@ export const Home = () => {
       </S.CategoriesSection>
       <S.BeersSection>
         {beers &&
-          beers.map((beer: any) => (
+          beers.map((beer: ProductType) => (
             <S.ProductCard key={beer.id}>
               <img src={beer.image} alt={beer.title} />
               <p>{beer.title}</p>
               <p>$ {beer.price}</p>
-              {cart.find((cartBeer: any) => cartBeer.id === beer.id) ? (
+              {cart.find((cartBeer: ProductType) => cartBeer.id === beer.id) ? (
                 <S.SpecialButton key={beer.id}>
-                  <button
-                    onClick={() => dispatch(productRemoved({ id: beer.id }))}
-                  >
+                  <button onClick={() => dispatch(productRemoved(beer.id))}>
                     -
                   </button>
                   <p>
                     {
-                      cart.find((cartBeer: any) => cartBeer.id === beer.id)
-                        .quantity
+                      cart.find(
+                        (cartBeer: ProductType) => cartBeer.id === beer.id
+                      )?.quantity
                     }
                   </p>
                   <button

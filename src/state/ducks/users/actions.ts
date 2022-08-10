@@ -6,7 +6,7 @@ const USERS_URL = 'http://localhost:4000/users';
 
 const getUsers = createAsyncThunk(
   'users/getUsers',
-  async (token: any, { rejectWithValue }) => {
+  async (token: string, { rejectWithValue }) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };

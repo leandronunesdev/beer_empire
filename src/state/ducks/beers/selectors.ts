@@ -1,4 +1,6 @@
-const selectBeers = (state: any) => state.beers;
+import { RootState } from '../../store';
+
+const selectBeers = (state: RootState) => state.beers;
 
 const beersSelectors = {
   selectBeers,

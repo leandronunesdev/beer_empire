@@ -1,8 +1,9 @@
 import { createReducer, SerializedError } from '@reduxjs/toolkit';
+import { ProductType } from '../../../constants/genericTypes';
 import actions from './actions';
 
 export type BeersState = {
-  beers: any;
+  beers: ProductType[];
   isFetching: boolean;
   error?: SerializedError;
 };
@@ -18,7 +19,7 @@ const beersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.getBeers.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.getBeers.fulfilled, (state, action: any) => {
+    .addCase(actions.getBeers.fulfilled, (state, action) => {
       state.isFetching = false;
       state.error = undefined;
       state.beers = action.payload.beers;
@@ -30,9 +31,9 @@ const beersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.deleteBeer.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.deleteBeer.fulfilled, (state, action: any) => {
+    .addCase(actions.deleteBeer.fulfilled, (state, action) => {
       const beers = state.beers.filter(
-        (beer: any) => beer.id !== action.payload
+        (beer: ProductType) => beer.id !== action.payload
       );
       state.beers = beers;
       state.isFetching = false;
@@ -45,7 +46,7 @@ const beersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.createBeer.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.createBeer.fulfilled, (state, action: any) => {
+    .addCase(actions.createBeer.fulfilled, (state, action) => {
       state.isFetching = false;
       state.error = undefined;
       state.beers.push(action.payload.data);
@@ -57,9 +58,9 @@ const beersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.updateBeer.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.updateBeer.fulfilled, (state, action: any) => {
+    .addCase(actions.updateBeer.fulfilled, (state, action) => {
       const updatedBeerIndex = state.beers.findIndex(
-        (beer: any) => beer.id === action.payload.data.id
+        (beer: ProductType) => beer.id === action.payload.data.id
       );
       state.isFetching = false;
       state.error = undefined;

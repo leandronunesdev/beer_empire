@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button } from '..';
 import { hooks } from '../../state';
 import { authOperations, authSelectors } from '../../state/ducks/auth';
@@ -17,14 +17,18 @@ export const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [ageError, setAgeError] = useState('');
 
-  const onNameChanged = (e: any) => setName(e.target.value);
-  const onEmailChanged = (e: any) => setEmail(e.target.value);
-  const onAgeChanged = (e: any) => setAge(e.target.value);
-  const onPasswordChanged = (e: any) => setPassword(e.target.value);
+  const onNameChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setName(e.target.value);
+  const onEmailChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
+  const onAgeChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setAge(e.target.value);
+  const onPasswordChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
 
   const canSave = [name, email, parseInt(age) >= 18, password].every(Boolean);
 
-  const registerUser = (e: any) => {
+  const registerUser = (e: FormEvent) => {
     e.preventDefault();
     if (parseInt(age) >= 18) {
       const params = {

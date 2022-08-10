@@ -6,7 +6,7 @@ const BEERS_URL = 'http://localhost:4000/beers';
 
 const getBeers = createAsyncThunk(
   'beers/getBeers',
-  async (token: any, { rejectWithValue }) => {
+  async (token: string, { rejectWithValue }) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -26,7 +26,7 @@ const getBeers = createAsyncThunk(
 
 const deleteBeer = createAsyncThunk(
   'beers/deleteBeer',
-  async (beerId: any, { rejectWithValue }) => {
+  async (beerId: number, { rejectWithValue }) => {
     const { token } = store.getState().auth;
 
     const headers = {

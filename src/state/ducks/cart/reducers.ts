@@ -1,8 +1,9 @@
 import { createReducer, SerializedError } from '@reduxjs/toolkit';
+import { ProductCartType } from '../../../constants/genericTypes';
 import actions from './actions';
 
 export type CartState = {
-  cart: any;
+  cart: ProductCartType[];
   isFetching: boolean;
   error?: SerializedError;
 };
@@ -18,9 +19,11 @@ const cartReducer = createReducer(initialState, (builder) => {
     .addCase(actions.productAdded.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.productAdded.fulfilled, (state, action: any) => {
+    .addCase(actions.productAdded.fulfilled, (state, action) => {
       const { id } = action.payload;
-      const existingProduct = state.cart.find((beer: any) => beer.id === id);
+      const existingProduct = state.cart.find(
+        (beer: ProductCartType) => beer.id === id
+      );
       if (existingProduct) {
         existingProduct.quantity++;
       } else {
@@ -36,16 +39,20 @@ const cartReducer = createReducer(initialState, (builder) => {
     .addCase(actions.productRemoved.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.productRemoved.fulfilled, (state, action: any) => {
-      const { id } = action.payload;
-      const existingProduct = state.cart.find((beer: any) => beer.id === id);
+    .addCase(actions.productRemoved.fulfilled, (state, action) => {
+      const id = action.payload;
+      const existingProduct = state.cart.find(
+        (beer: ProductCartType) => beer.id === id
+      );
 
-      if (existingProduct.quantity > 1) {
+      if (existingProduct && existingProduct.quantity > 1) {
         existingProduct.quantity--;
         return;
       }
-      if (existingProduct.quantity === 1) {
-        const cart = state.cart.filter((beer: any) => beer.id !== id);
+      if (existingProduct && existingProduct.quantity === 1) {
+        const cart = state.cart.filter(
+          (beer: ProductCartType) => beer.id !== id
+        );
         state.cart = cart;
         return;
       }
@@ -59,7 +66,7 @@ const cartReducer = createReducer(initialState, (builder) => {
     .addCase(actions.checkout.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.checkout.fulfilled, (state, action: any) => {
+    .addCase(actions.checkout.fulfilled, (state) => {
       state.cart = [];
       state.isFetching = false;
       state.error = undefined;

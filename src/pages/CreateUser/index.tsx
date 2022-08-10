@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Button } from '../../components';
 
+import { Button } from '../../components';
 import { hooks } from '../../state';
 import { userOperations, userSelectors } from '../../state/ducks/users';
 
@@ -20,14 +20,18 @@ export const CreateUser = () => {
   const [password, setPassword] = useState('');
   const [addedUser, setAddedUser] = useState(false);
 
-  const onNameChanged = (e: any) => setName(e.target.value);
-  const onEmailChanged = (e: any) => setEmail(e.target.value);
-  const onRoleChanged = (e: any) => setRole(e.target.value);
-  const onPasswordChanged = (e: any) => setPassword(e.target.value);
+  const onNameChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setName(e.target.value);
+  const onEmailChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
+  const onRoleChanged = (e: ChangeEvent<HTMLSelectElement>) =>
+    setRole(e.target.value);
+  const onPasswordChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
 
   const canSave = [name, email, role, password].every(Boolean);
 
-  const handleUserCreation = (e: any) => {
+  const handleUserCreation = (e: FormEvent) => {
     e.preventDefault();
 
     const params = {

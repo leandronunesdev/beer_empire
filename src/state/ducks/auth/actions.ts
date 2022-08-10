@@ -30,8 +30,9 @@ const logOut = createAsyncThunk('auth/logOut', async (message?: string) => {
 const userRegister = createAsyncThunk(
   'auth/Register',
   async (params: Record<string, string>, { rejectWithValue }) => {
+    const role = 'user';
     try {
-      const { data } = await axios.post(REG_URL, params);
+      const { data } = await axios.post(REG_URL, { ...params, role: role });
       localStorage.setItem('token', data.accessToken);
       localStorage.setItem('user_name', data.user.name);
       localStorage.setItem('role', data.user.role);

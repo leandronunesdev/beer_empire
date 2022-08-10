@@ -2,7 +2,7 @@ import { createReducer, SerializedError } from '@reduxjs/toolkit';
 import actions from './actions';
 
 export type CategoriesState = {
-  categories: any;
+  categories: string[];
   isFetching: boolean;
   error?: SerializedError;
 };
@@ -18,7 +18,7 @@ const categoriesReducer = createReducer(initialState, (builder) => {
     .addCase(actions.getCategories.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.getCategories.fulfilled, (state, action: any) => {
+    .addCase(actions.getCategories.fulfilled, (state, action) => {
       state.isFetching = false;
       state.error = undefined;
       state.categories = action.payload.categories;

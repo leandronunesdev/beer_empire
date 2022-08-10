@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ProductCartType } from '../../../constants/genericTypes';
 
 const productAdded = createAsyncThunk(
   'cart/productAdded',
-  async (product: any, { rejectWithValue }) => {
+  async (product: ProductCartType, { rejectWithValue }) => {
     try {
       return product;
     } catch (err: any) {
@@ -16,9 +17,9 @@ const productAdded = createAsyncThunk(
 
 const productRemoved = createAsyncThunk(
   'cart/productRemoved',
-  async (product: any, { rejectWithValue }) => {
+  async (productId: number, { rejectWithValue }) => {
     try {
-      return product;
+      return productId;
     } catch (err: any) {
       if (!(err as Record<string, string>).response) {
         throw err;

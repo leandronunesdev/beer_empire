@@ -1,4 +1,6 @@
-const selectUsers = (state: any) => state.users;
+import { RootState } from '../../store';
+
+const selectUsers = (state: RootState) => state.users;
 
 const usersSelectors = {
   selectUsers,

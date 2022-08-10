@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button } from '..';
 import { hooks } from '../../state';
 import { authOperations, authSelectors } from '../../state/ducks/auth';
@@ -15,12 +15,14 @@ export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onEmailChanged = (e: any) => setEmail(e.target.value);
-  const onPasswordChanged = (e: any) => setPassword(e.target.value);
+  const onEmailChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
+  const onPasswordChanged = (e: ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
 
   const canLogin = [email, password].every(Boolean);
 
-  const loginUser = (e: any) => {
+  const loginUser = (e: FormEvent) => {
     e.preventDefault();
 
     const params = {

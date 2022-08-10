@@ -1,9 +1,10 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AlertDialog } from '../../components';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
+import { ProductType } from '../../constants/genericTypes';
+import { AlertDialog } from '../../components';
 import { hooks } from '../../state';
 import { authSelectors } from '../../state/ducks/auth';
 import { beerOperations, beerSelectors } from '../../state/ducks/beers';
@@ -23,11 +24,11 @@ export const Edit = () => {
   const dispatch = useAppDispatch();
 
   const [open, setOpen] = useState(false);
-  const [selectedBeer, setSelectedBeer] = useState('');
-  const [editBeer, setEditBeer] = useState();
+  const [selectedBeerId, setSelectedBeerId] = useState<number>();
+  const [editBeer, setEditBeer] = useState<ProductType>();
 
-  const handleClickOpen = (beerId: any) => {
-    setSelectedBeer(beerId);
+  const handleClickOpen = (beerId: number) => {
+    setSelectedBeerId(beerId);
     setOpen(true);
   };
 
@@ -41,11 +42,13 @@ export const Edit = () => {
   };
 
   const handleConfirm = () => {
-    dispatch(deleteBeer(selectedBeer));
+    if (selectedBeerId) {
+      dispatch(deleteBeer(selectedBeerId));
+    }
     handleClose();
   };
 
-  const handleEdit = (beer: any) => {
+  const handleEdit = (beer: ProductType) => {
     setEditBeer(beer);
   };
 
@@ -66,7 +69,7 @@ export const Edit = () => {
             <p>Actions</p>
           </S.CartHeader>
 
-          {beers.map((beer: any) => (
+          {beers.map((beer: ProductType) => (
             <S.ProductCard key={beer.id}>
               <img src={beer.image} alt={beer.title} />
               <p>{beer.title}</p>

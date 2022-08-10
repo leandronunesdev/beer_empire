@@ -3,7 +3,7 @@ import actions from './actions';
 
 export type AuthState = {
   userName?: Record<string, string>;
-  userRole?: Record<string, string>;
+  userRole: string;
   isFetching: boolean;
   token?: Record<string, string>;
   error?: SerializedError;
@@ -12,7 +12,7 @@ export type AuthState = {
 
 const initialState: AuthState = {
   userName: undefined,
-  userRole: undefined,
+  userRole: '',
   isFetching: false,
   token: undefined,
   error: undefined,
@@ -24,7 +24,7 @@ const authReducer = createReducer(initialState, (builder) => {
     .addCase(actions.logIn.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.logIn.fulfilled, (state, action: any) => {
+    .addCase(actions.logIn.fulfilled, (state, action) => {
       const { accessToken, user } = action.payload.data;
       state.isFetching = false;
       state.error = undefined;
@@ -40,14 +40,14 @@ const authReducer = createReducer(initialState, (builder) => {
     .addCase(actions.logOut.fulfilled, (state, action) => {
       state.isFetching = false;
       state.userName = undefined;
-      state.userRole = undefined;
+      state.userRole = '';
       state.token = undefined;
       state.isLogged = false;
     })
     .addCase(actions.userRegister.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.userRegister.fulfilled, (state, action: any) => {
+    .addCase(actions.userRegister.fulfilled, (state, action) => {
       const { accessToken, user } = action.payload.data;
       state.isFetching = false;
       state.error = undefined;

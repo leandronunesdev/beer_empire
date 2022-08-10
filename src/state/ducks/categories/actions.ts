@@ -5,7 +5,7 @@ const CATEGORIES_URL = 'http://localhost:4000/categories';
 
 const getCategories = createAsyncThunk(
   'categories/getCategories',
-  async (token: any, { rejectWithValue }) => {
+  async (token: string, { rejectWithValue }) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };

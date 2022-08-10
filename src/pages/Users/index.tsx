@@ -6,6 +6,7 @@ import { userOperations } from '../../state/ducks/users';
 import usersActions from '../../state/ducks/users/actions';
 import usersSelectors from '../../state/ducks/users/selectors';
 import { AlertDialog } from '../../components';
+import { UserType } from '../../constants/genericTypes';
 
 import * as S from './styles';
 
@@ -20,7 +21,7 @@ export const Users = () => {
   const dispatch = useAppDispatch();
 
   const [open, setOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState<number>();
 
   useEffect(() => {
     if (token && !users.length) {
@@ -28,8 +29,8 @@ export const Users = () => {
     }
   }, [token, users, dispatch, getUsers]);
 
-  const handleClickOpen = (userId: any) => {
-    setSelectedUser(userId);
+  const handleClickOpen = (userId: number) => {
+    setSelectedUserId(userId);
     setOpen(true);
   };
 
@@ -43,7 +44,7 @@ export const Users = () => {
   };
 
   const handleConfirm = () => {
-    dispatch(deleteUser(selectedUser));
+    dispatch(deleteUser(selectedUserId));
     handleClose();
   };
 
@@ -58,7 +59,7 @@ export const Users = () => {
           <p>Actions</p>
         </S.UsersHeader>
 
-        {users.map((user: any) => (
+        {users.map((user: UserType) => (
           <S.UserCard key={user.id}>
             <p>{user.name}</p>
             <p>{user.email}</p>

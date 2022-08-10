@@ -1,8 +1,9 @@
 import { createReducer, SerializedError } from '@reduxjs/toolkit';
+import { UserType } from '../../../constants/genericTypes';
 import actions from './actions';
 
 export type UserState = {
-  users: any;
+  users: UserType[];
   isFetching: boolean;
   error?: SerializedError;
 };
@@ -18,7 +19,7 @@ const usersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.getUsers.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.getUsers.fulfilled, (state, action: any) => {
+    .addCase(actions.getUsers.fulfilled, (state, action) => {
       state.isFetching = false;
       state.error = undefined;
       state.users = action.payload.users;
@@ -30,9 +31,9 @@ const usersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.deleteUser.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.deleteUser.fulfilled, (state, action: any) => {
+    .addCase(actions.deleteUser.fulfilled, (state, action) => {
       const users = state.users.filter(
-        (user: any) => user.id !== action.payload
+        (user: UserType) => user.id !== action.payload
       );
       state.users = users;
       state.isFetching = false;
@@ -45,7 +46,7 @@ const usersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.createUser.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.createUser.fulfilled, (state, action: any) => {
+    .addCase(actions.createUser.fulfilled, (state, action) => {
       state.isFetching = false;
       state.error = undefined;
       state.users.push(action.payload.data.user);
@@ -57,9 +58,9 @@ const usersReducer = createReducer(initialState, (builder) => {
     .addCase(actions.updateUser.pending, (state) => {
       state.isFetching = true;
     })
-    .addCase(actions.updateUser.fulfilled, (state, action: any) => {
+    .addCase(actions.updateUser.fulfilled, (state, action) => {
       const updatedUserIndex = state.users.findIndex(
-        (user: any) => user.id === action.payload.data.id
+        (user: UserType) => user.id === action.payload.data.id
       );
       state.isFetching = false;
       state.error = undefined;

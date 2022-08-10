@@ -1,4 +1,6 @@
-const selectCart = (state: any) => state.cart;
+import { RootState } from '../../store';
+
+const selectCart = (state: RootState) => state.cart;
 
 const cartSelectors = {
   selectCart,
