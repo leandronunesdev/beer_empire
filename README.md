@@ -28,7 +28,7 @@
 <h1 id="demo">App demo</h1>
 
 <h1 align="center">
-  <img alt="EmporioDaCerveja" title="#EmporioDaCerveja" src="./src/assets/emporio.gif" />
+  <img alt="EmporioDaCerveja" title="#EmporioDaCerveja" src="./src/assets/images/beer_empire_demo.gif" />
 </h1>
 
 <h1 id="requirements">Requirements</h1>
@@ -63,13 +63,13 @@ $ npm start
 # The server will start on port:3000 - access <http://localhost:3000>
 ```
 
-## Login credentials
+# Login credentials
 
-# Admin
+## Admin
 
 - email: helen@facebook.com | password: 123123
 
-# Editor
+## Editor
 
 - email: mauricio@google.com | password: 123123
 
