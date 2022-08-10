@@ -41,7 +41,7 @@ Besides that, is good to have a good code editor as [VSCode](https://code.visual
 
 ```bash
 # Clone the backend repository and run the fake api according to the instructions
-$ git clone <https://github.com/leandronunesdev/fake-api-emporio>
+$ git clone <https://github.com/leandronunesdev/fake-api-empire>
 
 ```
 
@@ -49,7 +49,7 @@ $ git clone <https://github.com/leandronunesdev/fake-api-emporio>
 
 ```bash
 # Clone this repository
-$ git clone <https://github.com/leandronunesdev/emporio>
+$ git clone <https://github.com/leandronunesdev/beer_empire>
 
 # Acces the project folder using terminal/cmd
 $ cd beer_empire
