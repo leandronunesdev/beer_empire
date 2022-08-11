@@ -59,6 +59,9 @@ const authReducer = createReducer(initialState, (builder) => {
     .addCase(actions.userRegister.rejected, (state, action) => {
       state.isFetching = false;
       state.error = action.error;
+    })
+    .addCase(actions.clearError.fulfilled, (state) => {
+      state.error = undefined;
     });
 });
 

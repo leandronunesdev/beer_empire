@@ -1,7 +1,8 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../store';
+import { RootState } from '../store';
 
-const useAppDispatch = () => useDispatch<AppDispatch>();
+// using the any type instead of AppDispatch due to TS2345 error
+const useAppDispatch = () => useDispatch<any>();
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const hooks = { useAppDispatch, useAppSelector };

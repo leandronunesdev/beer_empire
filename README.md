@@ -28,7 +28,7 @@
 <h1 id="demo">App demo</h1>
 
 <h1 align="center">
-  <img alt="EmporioDaCerveja" title="#EmporioDaCerveja" src="./src/assets/images/beer_empire_demo.gif" />
+  <img alt="BeerEmpire" title="#BeerEmpire" src="./src/assets/images/beer_empire_demo.gif" />
 </h1>
 
 <h1 id="requirements">Requirements</h1>
@@ -72,6 +72,25 @@ $ npm start
 ## Editor
 
 - email: mauricio@google.com | password: 123123
+
+# Admin area
+
+<h1 align="center">
+  <img alt="AdminArea" title="#AdminArea" src="./src/assets/images/admin_area.png" />
+</h1>
+
+The Admin is able to:
+
+- Add products
+- Update products
+- Delete products
+- Add users
+- Delete users
+
+The Editor is able to:
+
+- Add products
+- Update products
 
 <h1 id="technologies">🛠 Technologies</h1>
 

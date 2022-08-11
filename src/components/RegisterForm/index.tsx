@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Button } from '..';
 import { hooks } from '../../state';
 import { authOperations, authSelectors } from '../../state/ducks/auth';
@@ -16,6 +16,7 @@ export const RegisterForm = () => {
   const [age, setAge] = useState('');
   const [password, setPassword] = useState('');
   const [ageError, setAgeError] = useState('');
+  const [passwordTip, setPasswordTip] = useState(false);
 
   const onNameChanged = (e: ChangeEvent<HTMLInputElement>) =>
     setName(e.target.value);
@@ -26,7 +27,20 @@ export const RegisterForm = () => {
   const onPasswordChanged = (e: ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
 
-  const canSave = [name, email, parseInt(age) >= 18, password].every(Boolean);
+  useEffect(() => {
+    if (password.length < 6 && password.length > 0) {
+      setPasswordTip(true);
+    } else {
+      setPasswordTip(false);
+    }
+  }, [password]);
+
+  const canSave = [
+    name,
+    email,
+    parseInt(age) >= 18,
+    password.length >= 6,
+  ].every(Boolean);
 
   const registerUser = (e: FormEvent) => {
     e.preventDefault();
@@ -83,8 +97,11 @@ export const RegisterForm = () => {
           required
           autoComplete='on'
         />
+        {passwordTip && (
+          <S.StyledError>Password must be at least 6 characters </S.StyledError>
+        )}
         <p>You must be 18 or older to use this website</p>
-        {error && <S.StyledError>{error.message}</S.StyledError>}
+        {error && <S.StyledError>E-mail already registered!</S.StyledError>}
         {ageError && <S.StyledError>{ageError}</S.StyledError>}
         <Button disabled={!canSave} label='Register' />
       </S.StyledForm>

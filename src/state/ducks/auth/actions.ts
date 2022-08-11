@@ -46,10 +46,18 @@ const userRegister = createAsyncThunk(
   }
 );
 
+const clearError = createAsyncThunk(
+  'auth/clearError',
+  async (message?: string) => {
+    return;
+  }
+);
+
 const authActions = {
   logIn,
   logOut,
   userRegister,
+  clearError,
 };
 
 export default authActions;
