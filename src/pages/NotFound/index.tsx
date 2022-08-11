@@ -12,7 +12,7 @@ export const NotFound = () => {
         The page you are looking for might have been removed, had its name
         changed or is temporarily unavailable
       </p>
-      <Link to='/login'>Got to Login</Link>
+      <Link to='/'>Go to Home</Link>
     </S.NotFoundSection>
   );
 };

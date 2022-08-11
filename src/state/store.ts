@@ -1,23 +1,32 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import authReducer from './ducks/auth/reducers';
 import beersReducer from './ducks/beers/reducers';
 import cartReducer from './ducks/cart/reducers';
 import categoriesReducer from './ducks/categories/reducers';
 import usersReducer from './ducks/users/reducers';
 
-const reducer = {
+const reducer = combineReducers({
   cart: cartReducer,
   beers: beersReducer,
   categories: categoriesReducer,
   auth: authReducer,
   users: usersReducer,
+});
+
+const persistConfig = {
+  key: 'root',
+  storage,
 };
 
+const persistedReducer = persistReducer(persistConfig, reducer);
+
 export const store = configureStore({
-  reducer,
+  reducer: persistedReducer,
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
-export default store;
+export const persistor = persistStore(store);
