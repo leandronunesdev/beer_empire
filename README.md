@@ -51,7 +51,7 @@ $ git clone <https://github.com/leandronunesdev/fake-api-empire>
 # Clone this repository
 $ git clone <https://github.com/leandronunesdev/beer_empire>
 
-# Acces the project folder using terminal/cmd
+# Access the project folder using terminal/cmd
 $ cd beer_empire
 
 # Install the dependencies
