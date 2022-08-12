@@ -45,7 +45,7 @@ $ git clone <https://github.com/leandronunesdev/fake-api-empire>
 
 ```
 
-### 🎲 Running the Frontend (server)
+### 🎲 Running the Frontend
 
 ```bash
 # Clone this repository
