@@ -57,7 +57,7 @@ $ cd beer_empire
 # Install the dependencies
 $ npm install
 
-# Execute the aplication on development mode
+# Execute the application on development mode
 $ npm start
 
 # The server will start on port:3000 - access <http://localhost:3000>
