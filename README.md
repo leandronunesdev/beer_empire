@@ -7,7 +7,7 @@
  <a href="#demo">App demo</a> •
  <a href="#requirements">Requirements</a> •
  <a href="#technologies">Technologies</a> • 
- <a href="#autor">Author</a>
+ <a href="#author">Author</a>
 </p>
 
 <h4 align="center"> 
