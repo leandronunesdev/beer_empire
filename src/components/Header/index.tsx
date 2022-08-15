@@ -1,8 +1,8 @@
-import React from 'react';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import { hooks } from '../../state';
 import { authOperations } from '../../state/ducks/auth';
-import { cartSelectors } from '../../state/ducks/cart';
+import { cartOperations, cartSelectors } from '../../state/ducks/cart';
 
 import * as S from './styles';
 
@@ -14,15 +14,20 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   const { logOut } = authOperations;
+  const { checkout } = cartOperations;
   const { selectCart } = cartSelectors;
-  const { cart } = useAppSelector(selectCart);
+  const { cartQuantity } = useAppSelector(selectCart);
+
+  const handleLogout = () => {
+    dispatch(logOut());
+    dispatch(checkout());
+  };
 
   return (
     <S.Wrapper>
       <S.StyledLogo />
       <p>Welcome {name}!</p>
       <p>Your access level is: {role}</p>
-      <S.SyledLink to='/cart'>Cart: {cart.length}</S.SyledLink>
       <S.SyledLink to='/'>Home</S.SyledLink>
       {(role === 'editor' || role === 'admin') && (
         <S.SyledLink to='/products/list'>Edit Products</S.SyledLink>
@@ -30,7 +35,13 @@ const Header = () => {
       {role === 'admin' && (
         <S.SyledLink to='/users/list'>Edit Users</S.SyledLink>
       )}
-      <S.StyledButton onClick={() => dispatch(logOut())}>Logout</S.StyledButton>
+      <S.SyledLink to='/cart'>
+        <ShoppingCartOutlinedIcon fontSize='large' />
+        <div>
+          <p>{cartQuantity}</p>
+        </div>
+      </S.SyledLink>
+      <S.StyledButton onClick={() => handleLogout()}>Logout</S.StyledButton>
     </S.Wrapper>
   );
 };

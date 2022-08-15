@@ -6,12 +6,14 @@ export type CartState = {
   cart: ProductCartType[];
   isFetching: boolean;
   error?: SerializedError;
+  cartQuantity: number;
 };
 
 const initialState: CartState = {
   cart: [],
   isFetching: false,
   error: undefined,
+  cartQuantity: 0,
 };
 
 const cartReducer = createReducer(initialState, (builder) => {
@@ -31,6 +33,7 @@ const cartReducer = createReducer(initialState, (builder) => {
       }
       state.isFetching = false;
       state.error = undefined;
+      state.cartQuantity++;
     })
     .addCase(actions.productAdded.rejected, (state, action) => {
       state.isFetching = false;
@@ -40,6 +43,9 @@ const cartReducer = createReducer(initialState, (builder) => {
       state.isFetching = true;
     })
     .addCase(actions.productRemoved.fulfilled, (state, action) => {
+      state.cartQuantity--;
+      state.isFetching = false;
+      state.error = undefined;
       const id = action.payload;
       const existingProduct = state.cart.find(
         (beer: ProductCartType) => beer.id === id
@@ -56,8 +62,6 @@ const cartReducer = createReducer(initialState, (builder) => {
         state.cart = cart;
         return;
       }
-      state.isFetching = false;
-      state.error = undefined;
     })
     .addCase(actions.productRemoved.rejected, (state, action) => {
       state.isFetching = false;
@@ -70,6 +74,7 @@ const cartReducer = createReducer(initialState, (builder) => {
       state.cart = [];
       state.isFetching = false;
       state.error = undefined;
+      state.cartQuantity = 0;
     })
     .addCase(actions.checkout.rejected, (state, action) => {
       state.isFetching = false;

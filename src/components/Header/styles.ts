@@ -18,8 +18,19 @@ export const SyledLink = styled(Link)`
   ${({ theme }) => css`
     text-decoration: none;
     color: black;
+    position: relative;
     &:hover {
       border-bottom: 3px solid ${theme.colors.yellow};
+    }
+
+    p {
+      background: red;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 50%;
+      position: absolute;
+      top: -30px;
+      right: -10px;
     }
   `}
 `;
