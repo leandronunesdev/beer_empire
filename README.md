@@ -7,7 +7,7 @@
  <a href="#demo">App demo</a> •
  <a href="#requirements">Requirements</a> •
  <a href="#technologies">Technologies</a> • 
- <a href="#autor">Author</a>
+ <a href="#author">Author</a>
 </p>
 
 <h4 align="center"> 
@@ -45,19 +45,19 @@ $ git clone <https://github.com/leandronunesdev/fake-api-empire>
 
 ```
 
-### 🎲 Running the Frontend (server)
+### 🎲 Running the Frontend
 
 ```bash
 # Clone this repository
 $ git clone <https://github.com/leandronunesdev/beer_empire>
 
-# Acces the project folder using terminal/cmd
+# Access the project folder using terminal/cmd
 $ cd beer_empire
 
 # Install the dependencies
 $ npm install
 
-# Execute the aplication on development mode
+# Execute the application on development mode
 $ npm start
 
 # The server will start on port:3000 - access <http://localhost:3000>
