@@ -21,7 +21,7 @@ export const Cart = () => {
   const cartTotal: number[] = [];
 
   const calcProductTotal = (price: string, quantity: number) => {
-    const total = parseInt(price, 10) * quantity;
+    const total = parseFloat(price) * quantity;
     cartTotal.push(total);
 
     return total.toFixed(2);
